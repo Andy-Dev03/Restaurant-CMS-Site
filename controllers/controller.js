@@ -159,6 +159,33 @@ class Controller {
     }
   }
 
+  static async patchCuisines(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { imgUrl } = req.body;
+      const cuisine = await Cuisine.findByPk(+id);
+
+      if (!cuisine) throw new Error("CUISINE_NOT_FOUND");
+
+      await Cuisine.update(
+        { imgUrl: imgUrl },
+        {
+          where: {
+            id: +id,
+          },
+        }
+      );
+      res.status(200).json({
+        statusCode: 200,
+        data: {
+          message: `Image success to update`,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async deleteCuisines(req, res, next) {
     try {
       const { id } = req.params;

@@ -9,7 +9,7 @@ const authentication = async (req, res, next) => {
 
     const token = authorization.split(" ")[1];
     const payload = convertTokenToPayload(token);
-    // console.log("Decoded Payload:", payload);
+    // console.log("This is Payload:", payload);
 
     const user = await User.findByPk(+payload.id);
 
@@ -39,11 +39,10 @@ const authorization = async (req, res, next) => {
     if (!cuisine) throw new Error("CUISINE_NOT_FOUND");
 
     if (userRole === "Admin") {
-      return next(); // Admin bebas
+      return next();
     }
 
     if (userRole === "Staff") {
-      // Hanya bisa akses jika dia adalah pembuat (authorId)
       if (cuisine.authorId === userId) {
         return next();
       } else {
@@ -55,4 +54,18 @@ const authorization = async (req, res, next) => {
   }
 };
 
-module.exports = { authentication, authorization };
+const onlyAdmin = async (req, res, next) => {
+  try {
+    const userRole = req.plusData.role;
+
+    if (userRole === "Admin") {
+      return next();
+    } else {
+      throw new Error("FORBIDDEN");
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { authentication, authorization, onlyAdmin };

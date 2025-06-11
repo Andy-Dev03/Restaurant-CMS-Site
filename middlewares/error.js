@@ -1,14 +1,18 @@
 const isError = (err, req, res, next) => {
   console.log(err);
-  //   res.send(err);
+  // res.send(err);
   let statusError = 500;
   let msgError = "Internal Server Error";
 
   if (err.name === "SequelizeValidationError") {
     statusError = 400;
-    msgError = err.errors.map((e) => {
-      return e.message;
-    });
+    if (err.errors.length === 1) {
+      msgError = err.errors[0].message;
+    } else {
+      msgError = err.errors.map((e) => {
+        return e.message;
+      });
+    }
   } else if (err.name === "SequelizeUniqueConstraintError") {
     statusError = 400;
     msgError = err.errors[0].message;
