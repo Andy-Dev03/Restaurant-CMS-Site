@@ -7,6 +7,7 @@ const {
   authentication,
   authorization,
   onlyAdmin,
+  middlewareMulter,
 } = require("../middlewares/middleware");
 
 //Log in
@@ -25,7 +26,12 @@ router.post("/cuisines", Controller.createCuisine);
 router.get("/cuisines", Controller.getCuisines);
 router.get("/cuisines/:id", Controller.findCuisines);
 router.put("/cuisines/:id", authorization, Controller.putCuisines);
-router.patch("/cuisines/update/:id", authorization, Controller.patchCuisines);
+router.patch(
+  "/cuisines/update/:id",
+  middlewareMulter,
+  authorization,
+  Controller.patchCuisines
+);
 router.delete("/cuisines/:id", authorization, Controller.deleteCuisines);
 
 //Support
