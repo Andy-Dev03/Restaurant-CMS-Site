@@ -1,4 +1,5 @@
 const { hashCompare } = require("../helpers/bcrypt");
+const { uploadToCloudinary } = require("../helpers/cloudinary");
 const { convertPayloadToToken } = require("../helpers/jwt");
 const { User, Category, Cuisine } = require("../models");
 
@@ -162,23 +163,30 @@ class Controller {
   static async patchCuisines(req, res, next) {
     try {
       const { id } = req.params;
-      const { imgUrl } = req.body;
+      // const { imgUrl } = req.body;
       const cuisine = await Cuisine.findByPk(+id);
 
       if (!cuisine) throw new Error("CUISINE_NOT_FOUND");
 
+      if (!req.file) throw new Error("FILE_NOT_FOUND");
+
+      const result = await uploadToCloudinary(req.file);
+      // console.log(result);
+
       await Cuisine.update(
-        { imgUrl: imgUrl },
+        { imgUrl: result.secure_url },
         {
           where: {
             id: +id,
           },
         }
       );
+
       res.status(200).json({
         statusCode: 200,
         data: {
           message: `Image success to update`,
+          imgUrl: result.secure_url,
         },
       });
     } catch (err) {
@@ -193,7 +201,7 @@ class Controller {
 
       if (!cuisine) throw new Error("CUISINE_NOT_FOUND");
 
-      const deletedCuisine = await Cuisine.destroy({
+      await Cuisine.destroy({
         where: {
           id: +id,
         },

@@ -18,7 +18,8 @@ const isError = (err, req, res, next) => {
     msgError = err.errors[0].message;
   } else if (
     err.message === "CUISINE_NOT_FOUND" ||
-    err.message === "CATEGORY_NOT_FOUND"
+    err.message === "CATEGORY_NOT_FOUND" ||
+    err.message === "FILE_NOT_FOUND"
   ) {
     statusError = 404;
     msgError = "Error not found";

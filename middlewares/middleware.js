@@ -1,6 +1,7 @@
 const { User, Cuisine } = require("../models");
 const { convertTokenToPayload } = require("../helpers/jwt");
 
+//Middleware authentication when loggin (get Access Token)
 const authentication = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
@@ -28,6 +29,7 @@ const authentication = async (req, res, next) => {
   }
 };
 
+//Middleware for authorization admin or staff
 const authorization = async (req, res, next) => {
   try {
     const userId = req.plusData.id;
@@ -54,6 +56,7 @@ const authorization = async (req, res, next) => {
   }
 };
 
+//Middleware just for admin
 const onlyAdmin = async (req, res, next) => {
   try {
     const userRole = req.plusData.role;
@@ -68,4 +71,9 @@ const onlyAdmin = async (req, res, next) => {
   }
 };
 
-module.exports = { authentication, authorization, onlyAdmin };
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
+
+const middlewareMulter = upload.single("imgUrl");
+
+module.exports = { authentication, authorization, onlyAdmin, middlewareMulter };
