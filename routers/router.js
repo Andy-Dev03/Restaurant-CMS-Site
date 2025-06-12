@@ -10,7 +10,7 @@ const {
   middlewareMulter,
 } = require("../middlewares/middleware");
 
-//Log in
+//Log in & Public
 router.post("/login", Controller.createLogin);
 
 router.use("/pub", pubRouter);
