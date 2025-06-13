@@ -9,6 +9,7 @@ const authentication = async (req, res, next) => {
     // console.log("Authorization Header:", req.headers.authorization);
 
     const token = authorization.split(" ")[1];
+
     const payload = convertTokenToPayload(token);
     // console.log("This is Payload:", payload);
 
@@ -40,17 +41,13 @@ const authorization = async (req, res, next) => {
 
     if (!cuisine) throw new Error("CUISINE_NOT_FOUND");
 
-    if (userRole === "Admin") {
-      return next();
-    }
-
-    if (userRole === "Staff") {
-      if (cuisine.authorId === userId) {
-        return next();
-      } else {
+    if (userRole !== "Admin") {
+      if (cuisine.authorId !== userId) {
         throw new Error("FORBIDDEN");
       }
     }
+
+    next();
   } catch (err) {
     next(err);
   }
@@ -61,11 +58,11 @@ const onlyAdmin = async (req, res, next) => {
   try {
     const userRole = req.plusData.role;
 
-    if (userRole === "Admin") {
-      return next();
-    } else {
+    if (userRole !== "Admin") {
       throw new Error("FORBIDDEN");
     }
+
+    next();
   } catch (err) {
     next(err);
   }
