@@ -6,7 +6,11 @@ const convertPayloadToToken = (payload) => {
 };
 
 const convertTokenToPayload = (token) => {
-  return jwt.verify(token, SECRET_KEY);
+  try {
+    return jwt.verify(token, SECRET_KEY);
+  } catch (error) {
+    throw new Error("INVALID_TOKEN");
+  }
 };
 
 module.exports = {

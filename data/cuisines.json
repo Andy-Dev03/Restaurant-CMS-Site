@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Sate Ayam",
+    "description": "Sate ayam khas Madura",
+    "price": 20000,
+    "imgUrl": "https://img.com/sate.jpg",
+    "categoryId": 1,
+    "authorId": 2
+  },
+  {
+    "name": "Bakso",
+    "description": "Bakso daging sapi dengan kuah kaldu",
+    "price": 15000,
+    "imgUrl": "https://img.com/bakso.jpg",
+    "categoryId": 1,
+    "authorId": 1
+  },
+  {
+    "name": "Es Teh Manis",
+    "description": "Minuman segar es teh",
+    "price": 5000,
+    "imgUrl": "https://img.com/esteh.jpg",
+    "categoryId": 3,
+    "authorId": 1
+  },
+  {
+    "name": "Rendang",
+    "description": "Daging sapi khas Padang",
+    "price": 30000,
+    "imgUrl": "https://img.com/rendang.jpg",
+    "categoryId": 15,
+    "authorId": 1
+  },
+  {
+    "name": "Nasi Goreng",
+    "description": "Nasi goreng spesial dengan telur",
+    "price": 18000,
+    "imgUrl": "https://img.com/nasgor.jpg",
+    "categoryId": 1,
+    "authorId": 1
+  },
+  {
+    "name": "Kimchi",
+    "description": "Sayuran fermentasi khas Korea",
+    "price": 12000,
+    "imgUrl": "https://img.com/kimchi.jpg",
+    "categoryId": 17,
+    "authorId": 1
+  },
+  {
+    "name": "Sushi",
+    "description": "Sushi roll dengan salmon",
+    "price": 25000,
+    "imgUrl": "https://img.com/sushi.jpg",
+    "categoryId": 18,
+    "authorId": 1
+  },
+  {
+    "name": "Cheeseburger",
+    "description": "Burger dengan keju leleh",
+    "price": 22000,
+    "imgUrl": "https://img.com/cheeseburger.jpg",
+    "categoryId": 8,
+    "authorId": 1
+  },
+  {
+    "name": "Keripik Singkong",
+    "description": "Cemilan renyah dari singkong",
+    "price": 8000,
+    "imgUrl": "https://img.com/keripik.jpg",
+    "categoryId": 2,
+    "authorId": 1
+  },
+  {
+    "name": "Cendol",
+    "description": "Minuman tradisional manis",
+    "price": 10000,
+    "imgUrl": "https://img.com/cendol.jpg",
+    "categoryId": 3,
+    "authorId": 1
+  },
+  {
+    "name": "Kue Lapis",
+    "description": "Kue tradisional berlapis warna",
+    "price": 7000,
+    "imgUrl": "https://img.com/kuelapis.jpg",
+    "categoryId": 12,
+    "authorId": 1
+  },
+  {
+    "name": "Dimsum",
+    "description": "Cemilan kukus khas Cina",
+    "price": 15000,
+    "imgUrl": "https://img.com/dimsum.jpg",
+    "categoryId": 20,
+    "authorId": 1
+  },
+  {
+    "name": "Spaghetti",
+    "description": "Pasta saus bolognese",
+    "price": 22000,
+    "imgUrl": "https://img.com/spaghetti.jpg",
+    "categoryId": 19,
+    "authorId": 1
+  },
+  {
+    "name": "Ayam Geprek",
+    "description": "Ayam goreng sambal pedas",
+    "price": 18000,
+    "imgUrl": "https://img.com/geprek.jpg",
+    "categoryId": 13,
+    "authorId": 1
+  },
+  {
+    "name": "Tahu Isi",
+    "description": "Tahu goreng isi sayur",
+    "price": 6000,
+    "imgUrl": "https://img.com/tahuisi.jpg",
+    "categoryId": 2,
+    "authorId": 1
+  },
+  {
+    "name": "Capcay",
+    "description": "Sayuran tumis bergizi",
+    "price": 16000,
+    "imgUrl": "https://img.com/capcay.jpg",
+    "categoryId": 6,
+    "authorId": 1
+  },
+  {
+    "name": "Bistik Jawa",
+    "description": "Bistik khas daerah Jawa",
+    "price": 24000,
+    "imgUrl": "https://img.com/bistik.jpg",
+    "categoryId": 16,
+    "authorId": 1
+  },
+  {
+    "name": "Roti Bakar",
+    "description": "Roti bakar coklat keju",
+    "price": 12000,
+    "imgUrl": "https://img.com/rotibakar.jpg",
+    "categoryId": 4,
+    "authorId": 1
+  },
+  {
+    "name": "Ikan Bakar",
+    "description": "Ikan bakar bumbu pedas",
+    "price": 27000,
+    "imgUrl": "https://img.com/ikanbakar.jpg",
+    "categoryId": 9,
+    "authorId": 1
+  },
+  {
+    "name": "Tteokbokki",
+    "description": "Kue beras pedas Korea",
+    "price": 22000,
+    "imgUrl": "https://img.com/tteokbokki.jpg",
+    "categoryId": 17,
+    "authorId": 1
+  }
+]
