@@ -32,6 +32,9 @@ const isError = (err, req, res, next) => {
   } else if (err.message === "UNAUTHENTICATED") {
     statusError = 401;
     msgError = "You must login first";
+  } else if (err.message === "INVALID_TOKEN") {
+    statusError = 401;
+    msgError = "Your token is invalid";
   } else if (err.message === "FORBIDDEN") {
     statusError = 403;
     msgError = "You are not authorized to do this action";

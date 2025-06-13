@@ -1,3 +1,4 @@
+const { Op, col } = require("sequelize");
 const { hashCompare } = require("../helpers/bcrypt");
 const { uploadToCloudinary } = require("../helpers/cloudinary");
 const { convertPayloadToToken } = require("../helpers/jwt");
@@ -54,7 +55,7 @@ class Controller {
 
       res.status(200).json({
         statusCode: 200,
-        accesToken: token,
+        accessToken: token,
       });
     } catch (err) {
       next(err);
@@ -127,8 +128,7 @@ class Controller {
   static async putCuisines(req, res, next) {
     try {
       const { id } = req.params;
-      const { name, description, price, imgUrl, categoryId, authorId } =
-        req.body;
+      const { name, description, price, imgUrl, categoryId } = req.body;
       const cuisine = await Cuisine.findByPk(+id);
 
       if (!cuisine) throw new Error("CUISINE_NOT_FOUND");
@@ -140,7 +140,6 @@ class Controller {
           price,
           imgUrl,
           categoryId,
-          authorId,
         },
         {
           where: {
@@ -163,7 +162,6 @@ class Controller {
   static async patchCuisines(req, res, next) {
     try {
       const { id } = req.params;
-      // const { imgUrl } = req.body;
       const cuisine = await Cuisine.findByPk(+id);
 
       if (!cuisine) throw new Error("CUISINE_NOT_FOUND");
@@ -171,7 +169,6 @@ class Controller {
       if (!req.file) throw new Error("FILE_NOT_FOUND");
 
       const result = await uploadToCloudinary(req.file);
-      // console.log(result);
 
       await Cuisine.update(
         { imgUrl: result.secure_url },
@@ -278,11 +275,48 @@ class Controller {
   //Public
   static async getPubCuisines(req, res, next) {
     try {
-      const cuisine = await Cuisine.findAll();
+      const { search, sort, filter } = req.query;
+      let { page } = req.query;
+
+      const option = {
+        where: {},
+      };
+
+      //search
+      if (search) {
+        option.where.name = {
+          [Op.iLike]: `%${search}%`,
+        };
+      }
+
+      //sort
+      if (sort) {
+        const ordering = sort[0] === "-" ? "DESC" : "ASC";
+        const columnName = ordering === "DESC" ? sort.slice(1) : sort;
+        option.order = [[columnName, ordering]];
+      }
+
+      //filter
+      if (filter) {
+        option.where.categoryId = filter;
+      }
+
+      let limit = 10;
+      if (!+page) page = 1;
+
+      if (page) {
+        (option.limit = limit), (option.offset = limit * (page - 1));
+      }
+
+      const { count, rows } = await Cuisine.findAndCountAll(option);
 
       res.status(200).json({
         statusCode: 200,
-        data: cuisine,
+        total: count,
+        size: limit,
+        totalPage: Math.ceil(count / limit),
+        currentPage: +page,
+        data: rows,
       });
     } catch (err) {
       next(err);
