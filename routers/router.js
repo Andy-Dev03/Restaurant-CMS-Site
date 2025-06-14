@@ -10,8 +10,9 @@ const {
   middlewareMulter,
 } = require("../middlewares/middleware");
 
+router.get("/", Controller.main);
 //Log in & Public
-router.post("/login", Controller.createLogin);
+router.post("/login", Controller.postLogin);
 
 router.use("/pub", pubRouter);
 
@@ -27,7 +28,7 @@ router.get("/cuisines", Controller.getCuisines);
 router.get("/cuisines/:id", Controller.findCuisines);
 router.put("/cuisines/:id", authorization, Controller.putCuisines);
 router.patch(
-  "/cuisines/update/:id",
+  "/cuisines/:id",
   middlewareMulter,
   authorization,
   Controller.patchCuisines

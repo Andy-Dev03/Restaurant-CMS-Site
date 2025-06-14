@@ -100,7 +100,7 @@ describe("POST /cuisines", () => {
       expect(response.status).toBe(401);
       expect(response.body).toHaveProperty(
         "error.message",
-        "You must login first"
+        "Access token is required"
       );
     });
 
@@ -193,7 +193,7 @@ describe("PUT /cuisines/:id", () => {
       expect(response.status).toBe(401);
       expect(response.body).toHaveProperty(
         "error.message",
-        "You must login first"
+        "Access token is required"
       );
     });
 
@@ -295,7 +295,7 @@ describe("DELETE /cuisines/:id", () => {
       expect(response.status).toBe(401);
       expect(response.body).toHaveProperty(
         "error.message",
-        "You must login first"
+        "Access token is required"
       );
     });
 

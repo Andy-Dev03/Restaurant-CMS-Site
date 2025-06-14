@@ -31,7 +31,7 @@ const isError = (err, req, res, next) => {
     msgError = "Invalid email or password";
   } else if (err.message === "UNAUTHENTICATED") {
     statusError = 401;
-    msgError = "You must login first";
+    msgError = "Access token is required";
   } else if (err.name === "JsonWebTokenError") {
     statusError = 401;
     msgError = "Your token is invalid";
