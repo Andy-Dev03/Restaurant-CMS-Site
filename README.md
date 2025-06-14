@@ -2,6 +2,10 @@
 
 # P2-Challenge-1 (Server Side)
 
+## LINK DEPLOY
+
+- `https://www.andylie.web.id`
+
 > Tuliskan API Docs kamu di sini
 
 # Restaurant App API Documentation
