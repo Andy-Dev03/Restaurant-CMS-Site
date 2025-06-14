@@ -13,12 +13,12 @@ List of available endpoints:
 - `POST /login`
 - `GET /pub/cuisines`
 - `GET /pub/cuisines/:id`
-- `POST /add-user
+- `POST /add-user`
 - `POST /cuisines`
 - `GET /cuisines`
 - `GET /cuisines/:id`
 - `PUT /cuisines/:id`
-- `PATCH /cuisines/:id` x
+- `PATCH /cuisines/:id`
 - `DELETE /cuisines/:id`
 - `POST /categories`
 - `GET /categories`
@@ -32,7 +32,7 @@ Description :
 
 - Login to get access Token and can use the features (Only for admin / staff)
 
-  Request:
+Request:
 
 - body:
 
@@ -892,7 +892,7 @@ _Response (401 - Unauthorized)_
 
 Description:
 
-- Update data Cateogry from id.
+- Update data Category from id.
 
 Request:
 
