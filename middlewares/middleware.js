@@ -6,13 +6,11 @@ const authentication = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
     if (!authorization) throw new Error("UNAUTHENTICATED");
-    // console.log("Authorization Header:", req.headers.authorization);
 
     const token = authorization.split(" ")[1];
     if (!token) throw new Error("UNAUTHENTICATED");
 
     const payload = convertTokenToPayload(token);
-    // console.log("This is Payload:", payload);
 
     const user = await User.findByPk(+payload.id);
 
