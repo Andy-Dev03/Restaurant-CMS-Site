@@ -350,7 +350,7 @@ describe("GET /pub/cuisines/", () => {
       expect(response.body).toHaveProperty("data");
     });
 
-    test("Succesfully get cuisines with filter", async () => {
+    test("Succesfully get cuisines length with page", async () => {
       const response = await request(app).get("/pub/cuisines?page=1");
 
       expect(response.status).toBe(200);
