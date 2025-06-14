@@ -77,8 +77,7 @@ class Controller {
   //Utama
   static async createCuisine(req, res, next) {
     try {
-      const { name, description, price, imgUrl, categoryId, authorId } =
-        req.body;
+      const { name, description, price, imgUrl, categoryId } = req.body;
 
       const newCuisine = await Cuisine.create({
         name,
@@ -86,7 +85,7 @@ class Controller {
         price,
         imgUrl,
         categoryId,
-        authorId,
+        authorId: req.plusData.id,
       });
 
       res.status(201).json({
@@ -100,7 +99,6 @@ class Controller {
   }
 
   static async getCuisines(req, res, next) {
-    console.log("data tambahab", req.plusData);
     try {
       const cuisines = await Cuisine.findAll({
         include: {
@@ -139,8 +137,7 @@ class Controller {
   static async putCuisines(req, res, next) {
     try {
       const { id } = req.params;
-      const { name, description, price, imgUrl, categoryId, authorId } =
-        req.body;
+      const { name, description, price, imgUrl, categoryId } = req.body;
       const cuisine = await Cuisine.findByPk(+id);
 
       if (!cuisine) throw new Error("CUISINE_NOT_FOUND");
@@ -152,7 +149,6 @@ class Controller {
           price,
           imgUrl,
           categoryId,
-          authorId,
         },
         {
           where: {
@@ -313,7 +309,10 @@ class Controller {
 
       //filter
       if (filter) {
-        option.where.categoryId = filter;
+        const categoryIds = filter.split(",").map(Number);
+        option.where.categoryId = {
+          [Op.in]: categoryIds,
+        };
       }
 
       let limit = 10;
