@@ -5,6 +5,16 @@ const { convertPayloadToToken } = require("../helpers/jwt");
 const { User, Category, Cuisine } = require("../models");
 
 class Controller {
+  //Main
+  static async main(req, res, next) {
+    try {
+      res.send(
+        "Welcome, if you wanna see more detail can go to. /pub/cuisines"
+      );
+    } catch (err) {
+      next(err);
+    }
+  }
   //Register
   static async createRegister(req, res, next) {
     try {
@@ -30,7 +40,7 @@ class Controller {
   }
 
   //Log in
-  static async createLogin(req, res, next) {
+  static async postLogin(req, res, next) {
     try {
       const { email, password } = req.body;
 
@@ -98,7 +108,6 @@ class Controller {
           },
         },
       });
-      console.log(cuisines);
 
       res.status(200).json({
         statusCode: 200,

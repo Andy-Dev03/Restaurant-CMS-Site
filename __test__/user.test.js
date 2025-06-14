@@ -1,7 +1,17 @@
 const request = require("supertest");
 const app = require("../app");
-
 const { sequelize } = require("../models");
+const { hashPassword } = require("../helpers/bcrypt");
+
+beforeAll(async () => {
+  //Users
+  const users = require("../data/users.json");
+  users.forEach((u) => {
+    u.password = hashPassword(u.password);
+    u.createdAt = u.updatedAt = new Date();
+  });
+  await sequelize.queryInterface.bulkInsert("Users", users, {});
+});
 
 afterAll(async () => {
   await sequelize.queryInterface.bulkDelete("Users", null, {

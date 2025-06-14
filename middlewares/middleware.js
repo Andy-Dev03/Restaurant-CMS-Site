@@ -9,6 +9,7 @@ const authentication = async (req, res, next) => {
     // console.log("Authorization Header:", req.headers.authorization);
 
     const token = authorization.split(" ")[1];
+    if (!token) throw new Error("UNAUTHENTICATED");
 
     const payload = convertTokenToPayload(token);
     // console.log("This is Payload:", payload);
