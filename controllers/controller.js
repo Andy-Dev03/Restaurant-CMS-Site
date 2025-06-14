@@ -29,9 +29,11 @@ class Controller {
       });
 
       res.status(201).json({
+        statusCode: 201,
         data: {
           username: staff.username,
           email: staff.email,
+          role: staff.role,
         },
       });
     } catch (err) {
@@ -137,7 +139,8 @@ class Controller {
   static async putCuisines(req, res, next) {
     try {
       const { id } = req.params;
-      const { name, description, price, imgUrl, categoryId } = req.body;
+      const { name, description, price, imgUrl, categoryId, authorId } =
+        req.body;
       const cuisine = await Cuisine.findByPk(+id);
 
       if (!cuisine) throw new Error("CUISINE_NOT_FOUND");
@@ -149,6 +152,7 @@ class Controller {
           price,
           imgUrl,
           categoryId,
+          authorId,
         },
         {
           where: {
@@ -191,7 +195,7 @@ class Controller {
       res.status(200).json({
         statusCode: 200,
         data: {
-          message: `Image success to update`,
+          message: `Image ${cuisine.name} success to update`,
           imgUrl: result.secure_url,
         },
       });
@@ -247,6 +251,7 @@ class Controller {
       const categories = await Category.findAll();
 
       res.status(200).json({
+        statusCode: 200,
         data: categories,
       });
     } catch (err) {
@@ -274,6 +279,7 @@ class Controller {
       const updateCategory = await Category.findByPk(+id);
 
       res.status(200).json({
+        statusCode: 200,
         data: updateCategory,
       });
     } catch (err) {

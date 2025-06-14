@@ -18,8 +18,7 @@ const isError = (err, req, res, next) => {
     msgError = err.errors[0].message;
   } else if (
     err.message === "CUISINE_NOT_FOUND" ||
-    err.message === "CATEGORY_NOT_FOUND" ||
-    err.message === "FILE_NOT_FOUND"
+    err.message === "CATEGORY_NOT_FOUND"
   ) {
     statusError = 404;
     msgError = "Error not found";
@@ -38,6 +37,9 @@ const isError = (err, req, res, next) => {
   } else if (err.message === "FORBIDDEN") {
     statusError = 403;
     msgError = "You are not authorized to do this action";
+  } else if (err.message === "FILE_NOT_FOUND") {
+    statusError = 400;
+    msgError = "Image is required";
   }
 
   res.status(statusError).json({

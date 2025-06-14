@@ -14,11 +14,11 @@ List of available endpoints:
 - `GET /pub/cuisines`
 - `GET /pub/cuisines/:id`
 - `POST /add-user
-- `POST /cuisines` v
+- `POST /cuisines`
 - `GET /cuisines`
 - `GET /cuisines/:id`
 - `PUT /cuisines/:id`
-- `PATCH /cuisines/:id`
+- `PATCH /cuisines/:id` x
 - `DELETE /cuisines/:id`
 - `POST /categories`
 - `GET /categories`
@@ -28,7 +28,239 @@ List of available endpoints:
 
 ## 1. POST /login
 
+Description :
+
+- Login to get access Token and can use the features (Only for admin / staff)
+
+  Request:
+
+- body:
+
+```json
+{
+  "email": "string",
+  "password": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "statusCode": 200,
+  "access_token": "string"
+}
+```
+
+_Response (400 - Bad Request)_
+
+```json
+{
+  "statusCode": 400,
+  "error": {
+    "message": "Your email or password is empty"
+  }
+}
+```
+
+_Response (401 - Unauthorized)_
+
+```json
+{
+  "statusCode": 401,
+  "error": {
+    "message": "Invalid email or password"
+  }
+}
+```
+
+&nbsp;
+
+## 2. GET /pub/cuisines
+
+Description:
+
+- Get all Restaurant from database for public
+
+_Response (200 - OK)_
+
+```json
+{
+  "statusCode": 200,
+  "total": "integer",
+  "size": "integer",
+  "totalPage": "integer",
+  "currentPage": "integer",
+  "data": [
+    {
+      "id": "integer",
+      "name": "string",
+      "description": "string",
+      "price": "integer",
+      "imgUrl": "string",
+      "categoryId": "integer",
+      "authorId": "integer",
+      "createdAt": "date",
+      "updatedAt": "date",
+    },
+    {
+     "id": "integer",
+      "name": "string",
+      "description": "string",
+      "price": "integer",
+      "imgUrl": "string",
+      "categoryId": "integer",
+      "authorId": "integer",
+      "createdAt": "date",
+      "updatedAt": "date",
+    },
+    ...,
+  ]
+}
+```
+
+&nbsp;
+
+## 3. GET /pub/cuisines/:id
+
+Description:
+
+- Get Restaurant from id for public
+
+Request:
+
+- params:
+
+```json
+{
+  "id": "integer (required)"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "statusCode": 200,
+  "data": {
+    "id": "integer",
+    "name": "string",
+    "description": "string",
+    "price": "integer",
+    "imgUrl": "string",
+    "categoryId": "integer",
+    "authorId": "integer",
+    "createdAt": "date",
+    "updatedAt": "date"
+  }
+}
+```
+
+Response (404 - Not Found)
+
+```json
+{
+  "statusCode": 404,
+  "error": {
+    "message": "Error not found"
+  }
+}
+```
+
+&nbsp;
+
+## 4. POST /add-user
+
+Description:
+
+- Post to add new User for staff and only admin that can do the post
+
+Request:
+
+- headers :
+
+```json
+{
+  "Authorization": "Bearer <your acces token>"
+}
+```
+
+- body:
+
+```json
+{
+  "username": "string",
+  "email": "string",
+  "password": "string",
+  "phoneNumber": "string",
+  "address": "string"
+}
+```
+
+_Response (201 - Created)_
+
+```json
+{
+  "statusCode": 201,
+  "data": {
+    "username": "string",
+    "email": "string",
+    "role": "string"
+  }
+}
+```
+
+_Response (400 - Bad Request)_
+
+```json
+{
+    "statusCode": 400,
+    "error": {
+        "message": "Username is required"
+    }
+}
+OR WITH MANY VALIDATION
+{
+  "statusCode": 400,
+  "error": {
+    "message": [
+      "Username is required",
+      "Email is required",
+      "Password is required"
+    ]
+  }
+}
+```
+
+_Response (401 - Unauthorized)_
+
+```json
+{
+  "statusCode": 401,
+  "error": {
+    "message": "Access token is invalid"
+  }
+}
+```
+
+Response (403 - Forbidden)
+
+```json
+{
+  "statusCode": 403,
+  "error": {
+    "message": "You are not authorized to do this action"
+  }
+}
+```
+
+&nbsp;
+
 ## 5. POST /cuisines
+
+Description:
+
+- Post new Restaurant to database
 
 Request:
 
@@ -99,7 +331,10 @@ _Response (401 - Unauthorized)_
 
 ```json
 {
-  "message": "Access token is invalid"
+  "statusCode": 401,
+  "error": {
+    "message": "Access token is invalid"
+  }
 }
 ```
 
@@ -109,7 +344,7 @@ _Response (401 - Unauthorized)_
 
 Description:
 
-- Get all Restaurant from database
+- Get all Restaurant include User from database
 
 Request:
 
@@ -178,7 +413,557 @@ _Response (401 - Unauthorized)_
 
 ```json
 {
-  "message": "Access token is invalid"
+  "statusCode": 401,
+  "error": {
+    "message": "Access token is invalid"
+  }
+}
+```
+
+&nbsp;
+
+## 7. GET /cuisines/:id
+
+Description:
+
+- Get Restaurant from id
+
+Request:
+
+- headers :
+
+```json
+{
+  "Authorization": "Bearer <your acces token>"
+}
+```
+
+- params:
+
+```json
+{
+  "id": "integer (required)"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "statusCode": 200,
+  "data": {
+    "id": "integer",
+    "name": "string",
+    "description": "string",
+    "price": "integer",
+    "imgUrl": "string",
+    "categoryId": "integer",
+    "authorId": "integer",
+    "createdAt": "date",
+    "updatedAt": "date"
+  }
+}
+```
+
+_Response (401 - Unauthorized)_
+
+```json
+{
+  "statusCode": 401,
+  "error": {
+    "message": "Access token is invalid"
+  }
+}
+```
+
+Response (404 - Not Found)
+
+```json
+{
+  "statusCode": 404,
+  "error": {
+    "message": "Error not found"
+  }
+}
+```
+
+&nbsp;
+
+## 8. PUT /cuisines/:id
+
+Description:
+
+- Update data Restaurant from id. Just for 'Admin' or 'Staff' but it own
+
+Request:
+
+- headers :
+
+```json
+{
+  "Authorization": "Bearer <your acces token>"
+}
+```
+
+- params:
+
+```json
+{
+  "id": "integer (required)"
+}
+```
+
+- body :
+
+```json
+{
+  "name": "string",
+  "description": "string",
+  "price": "integer",
+  "imgUrl": "string",
+  "categoryId": "integer",
+  "authorId": "integer"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "statusCode": 200,
+  "data": {
+    "id": "integer",
+    "name": "string",
+    "description": "string",
+    "price": "integer",
+    "imgUrl": "string",
+    "categoryId": "integer",
+    "authorId": "integer",
+    "createdAt": "date",
+    "updatedAt": "date"
+  }
+}
+```
+
+_Response (400 - Bad Request)_
+
+```json
+{
+    "statusCode": 400,
+    "error": {
+        "message": "Name is required"
+    }
+}
+OR WITH MANY VALIDATION
+{
+  "statusCode": 400,
+  "error": {
+    "message": [
+      "Name is required",
+      "Description is required",
+      "Price min must be 1"
+    ]
+  }
+}
+```
+
+_Response (401 - Unauthorized)_
+
+```json
+{
+  "statusCode": 401,
+  "error": {
+    "message": "Access token is invalid"
+  }
+}
+```
+
+Response (403 - Forbidden)
+
+```json
+{
+  "statusCode": 403,
+  "error": {
+    "message": "You are not authorized to do this action"
+  }
+}
+```
+
+Response (404 - Not Found)
+
+```json
+{
+  "statusCode": 404,
+  "error": {
+    "message": "Error not found"
+  }
+}
+```
+
+&nbsp;
+
+## 9. PATCH /cuisines/:id
+
+Description:
+
+- Update ImageUrl Restaurant from id. Just for 'Admin' or 'Staff' but it own
+
+Request:
+
+- headers :
+
+```json
+{
+  "Authorization": "Bearer <your acces token>"
+}
+```
+
+- params:
+
+```json
+{
+  "id": "integer (required)"
+}
+```
+
+- body (form-data):
+
+```json
+{
+  "imgUrl": "file"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "statusCode": 200,
+  "data": {
+    "message": "Image <cuisine_name> success to update",
+    "imgUrl": "string"
+  }
+}
+```
+
+_Response (400 - Bad Request)_
+
+```json
+{
+  "statusCode": 400,
+  "error": {
+    "message": "Image is required"
+  }
+}
+```
+
+_Response (401 - Unauthorized)_
+
+```json
+{
+  "statusCode": 401,
+  "error": {
+    "message": "Access token is invalid"
+  }
+}
+```
+
+Response (403 - Forbidden)
+
+```json
+{
+  "statusCode": 403,
+  "error": {
+    "message": "You are not authorized to do this action"
+  }
+}
+```
+
+Response (404 - Not Found)
+
+```json
+{
+  "statusCode": 404,
+  "error": {
+    "message": "Error not found"
+  }
+}
+```
+
+&nbsp;
+
+## 10. DELETE /cuisines/:id
+
+Description:
+
+- Delete data Restaurant from id. Just for 'Admin' or 'Staff' but it own
+
+Request:
+
+- headers :
+
+```json
+{
+  "Authorization": "Bearer <your acces token>"
+}
+```
+
+- params:
+
+```json
+{
+  "id": "integer (required)"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "statusCode": 200,
+  "data": {
+    "cuisine": {
+      "id": "integer",
+      "name": "string",
+      "description": "string",
+      "price": "integer",
+      "imgUrl": "string",
+      "categoryId": "integer",
+      "authorId": "integer",
+      "createdAt": "date",
+      "updatedAt": "date"
+    },
+    "message": "<name> success to delete"
+  }
+}
+```
+
+_Response (401 - Unauthorized)_
+
+```json
+{
+  "statusCode": 401,
+  "error": {
+    "message": "Access token is invalid"
+  }
+}
+```
+
+Response (403 - Forbidden)
+
+```json
+{
+  "statusCode": 403,
+  "error": {
+    "message": "You are not authorized to do this action"
+  }
+}
+```
+
+Response (404 - Not Found)
+
+```json
+{
+  "statusCode": 404,
+  "error": {
+    "message": "Error not found"
+  }
+}
+```
+
+&nbsp;
+
+## 11. POST /categories
+
+Description:
+
+- Post new Category to database
+
+Request:
+
+- headers :
+
+```json
+{
+  "Authorization": "Bearer <your acces token>"
+}
+```
+
+- body :
+
+```json
+{
+  "name": "string"
+}
+```
+
+_Response (201 - Created)_
+
+```json
+{
+  "statusCode": 201,
+  "message": "Category created successfully",
+  "data": {
+    "id": "integer",
+    "name": "string",
+    "updatedAt": "date",
+    "createdAt": "date"
+  }
+}
+```
+
+_Response (400 - Bad Request)_
+
+```json
+{
+  "statusCode": 400,
+  "error": {
+    "message": "Name is required"
+  }
+}
+```
+
+_Response (401 - Unauthorized)_
+
+```json
+{
+  "statusCode": 401,
+  "error": {
+    "message": "Access token is invalid"
+  }
+}
+```
+
+&nbsp;
+
+## 12. GET /categories
+
+Description:
+
+- Get all Category from database
+
+Request:
+
+- headers :
+
+```json
+{
+  "Authorization": "Bearer <your acces token>"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "statusCode": 200,
+  "data": [
+    {
+      "id": "integer",
+      "name": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+    },
+    {
+     "id": "integer",
+      "name": "string",
+      "createdAt": "date",
+      "updatedAt": "date",
+    },
+    ...,
+  ]
+}
+```
+
+_Response (401 - Unauthorized)_
+
+```json
+{
+  "statusCode": 401,
+  "error": {
+    "message": "Access token is invalid"
+  }
+}
+```
+
+&nbsp;
+
+## 13. PUT /categories/:id
+
+Description:
+
+- Update data Cateogry from id.
+
+Request:
+
+- headers :
+
+```json
+{
+  "Authorization": "Bearer <your acces token>"
+}
+```
+
+- params:
+
+```json
+{
+  "id": "integer (required)"
+}
+```
+
+- body :
+
+```json
+{
+  "name": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "statusCode": 200,
+  "data": {
+    "id": "integer",
+    "name": "string",
+    "createdAt": "date",
+    "updatedAt": "date"
+  }
+}
+```
+
+_Response (400 - Bad Request)_
+
+```json
+{
+  "statusCode": 400,
+  "error": {
+    "message": "Name is required"
+  }
+}
+```
+
+_Response (401 - Unauthorized)_
+
+```json
+{
+  "statusCode": 401,
+  "error": {
+    "message": "Access token is invalid"
+  }
+}
+```
+
+Response (404 - Not Found)
+
+```json
+{
+  "statusCode": 404,
+  "error": {
+    "message": "Error not found"
+  }
 }
 ```
 
@@ -190,7 +975,10 @@ _Response (401 - Unauthorized)_
 
 ```json
 {
-  "message": "Access token is required"
+  "statusCode": 401,
+  "error": {
+    "message": "Access token is required"
+  }
 }
 ```
 
@@ -198,6 +986,9 @@ _Response (500 - Internal Server Error)_
 
 ```json
 {
-  "message": "Internal server error"
+  "statusCode": 500,
+  "error": {
+    "message": "Internal server error"
+  }
 }
 ```
