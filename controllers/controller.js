@@ -107,6 +107,9 @@ class Controller {
             exclude: ["password"],
           },
         },
+        where: {
+          authorId: req.plusData.id,
+        },
       });
 
       res.status(200).json({
@@ -347,6 +350,38 @@ class Controller {
       res.status(200).json({
         statusCode: 200,
         data: cuisine,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async getPubCategories(req, res, next) {
+    try {
+      const { filterId, filterName } = req.query;
+
+      const option = {
+        where: {},
+      };
+
+      if (filterId) {
+        const categoryIds = filterId.split(",").map(Number);
+        option.where.id = {
+          [Op.in]: categoryIds,
+        };
+      }
+
+      if (filterName) {
+        option.where.name = {
+          [Op.iLike]: `%${filterName}%`,
+        };
+      }
+
+      const getCategories = await Category.findAll(option);
+
+      res.status(200).json({
+        statusCode: 200,
+        data: getCategories,
       });
     } catch (err) {
       next(err);

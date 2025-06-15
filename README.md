@@ -17,6 +17,7 @@ List of available endpoints:
 - `POST /login`
 - `GET /pub/cuisines`
 - `GET /pub/cuisines/:id`
+- `GET /pub/categories`
 - `POST /add-user`
 - `POST /cuisines`
 - `GET /cuisines`
@@ -85,6 +86,19 @@ _Response (401 - Unauthorized)_
 Description:
 
 - Get all Restaurant from database for public
+
+Request:
+
+- query (Optional):
+
+```json
+{
+  "search": "string <name (case-insensitive)>",
+  "filter": "number <categoryId>",
+  "sort": "string or -string",
+  "page": "integer"
+}
+```
 
 _Response (200 - OK)_
 
@@ -173,7 +187,49 @@ Response (404 - Not Found)
 
 &nbsp;
 
-## 4. POST /add-user
+## 4. GET /pub/categories
+
+Description:
+
+- Get Categories for public
+
+Request:
+
+- query (Optional):
+
+```json
+{
+  "filterId": "number <id>",
+  "filterName": "string <name (case-insensitive)>"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "statusCode": 200,
+  "data": [
+    {
+      "id": "integer",
+      "name": "string",
+      "createdAt": "date",
+      "updatedAt": "date"
+    },
+    {
+      "id": "integer",
+      "name": "string",
+      "createdAt": "date",
+      "updatedAt": "date"
+    },
+    ...,
+  ]
+}
+```
+
+&nbsp;
+
+## 5. POST /add-user
 
 Description:
 
@@ -260,7 +316,7 @@ Response (403 - Forbidden)
 
 &nbsp;
 
-## 5. POST /cuisines
+## 6. POST /cuisines
 
 Description:
 
@@ -344,7 +400,7 @@ _Response (401 - Unauthorized)_
 
 &nbsp;
 
-## 6. GET /cuisines
+## 7. GET /cuisines
 
 Description:
 
@@ -426,7 +482,7 @@ _Response (401 - Unauthorized)_
 
 &nbsp;
 
-## 7. GET /cuisines/:id
+## 8. GET /cuisines/:id
 
 Description:
 
@@ -493,7 +549,7 @@ Response (404 - Not Found)
 
 &nbsp;
 
-## 8. PUT /cuisines/:id
+## 9. PUT /cuisines/:id
 
 Description:
 
@@ -606,7 +662,7 @@ Response (404 - Not Found)
 
 &nbsp;
 
-## 9. PATCH /cuisines/:id
+## 10. PATCH /cuisines/:id
 
 Description:
 
@@ -696,7 +752,7 @@ Response (404 - Not Found)
 
 &nbsp;
 
-## 10. DELETE /cuisines/:id
+## 11. DELETE /cuisines/:id
 
 Description:
 
@@ -777,7 +833,7 @@ Response (404 - Not Found)
 
 &nbsp;
 
-## 11. POST /categories
+## 12. POST /categories
 
 Description:
 
@@ -840,7 +896,7 @@ _Response (401 - Unauthorized)_
 
 &nbsp;
 
-## 12. GET /categories
+## 13. GET /categories
 
 Description:
 
@@ -892,7 +948,7 @@ _Response (401 - Unauthorized)_
 
 &nbsp;
 
-## 13. PUT /categories/:id
+## 14. PUT /categories/:id
 
 Description:
 
