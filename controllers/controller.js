@@ -107,9 +107,6 @@ class Controller {
             exclude: ["password"],
           },
         },
-        where: {
-          authorId: req.plusData.id,
-        },
       });
 
       res.status(200).json({
