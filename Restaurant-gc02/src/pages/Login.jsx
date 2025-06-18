@@ -1,4 +1,21 @@
+import axios from "axios";
+import { useState } from "react";
+
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const formLogin = async (event) => {
+    event.preventDefault();
+
+    const { data } = await axios.post("http://localhost:3000/login", {
+      email,
+      password,
+    });
+
+    localStorage.setItem("accessToken", data.accessToken);
+  };
+
   return (
     <>
       <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 min-h-screen flex items-center justify-center">
@@ -10,7 +27,7 @@ const Login = () => {
             <p class="text-gray-600 mt-2 font-semibold">Only Admin & Staff</p>
           </div>
 
-          <form action="" className="space-y-6">
+          <form className="space-y-6" onSubmit={formLogin}>
             <div>
               <label
                 for="email"
@@ -24,6 +41,8 @@ const Login = () => {
                 name="email"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
                 placeholder="Enter your email"
+                onChange={(event) => setEmail(event.target.value)}
+                value={email}
               />
             </div>
 
@@ -40,6 +59,8 @@ const Login = () => {
                 name="password"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
                 placeholder="Enter your password"
+                onChange={(event) => setPassword(event.target.value)}
+                value={password}
               />
             </div>
 
