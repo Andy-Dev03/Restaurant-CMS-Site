@@ -1,44 +1,12 @@
 import { useState } from "react";
 
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 const Detail = () => {
   return (
     <>
       <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 min-h-screen">
-        {/* <!-- Sticky Navigation --> */}
-        <div className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-700/50 p-4">
-          <nav>
-            <div className="flex items-center justify-between">
-              <p className="font-bold text-2xl text-white">
-                Restaurant Fun<span className="text-orange-600">.</span>
-              </p>
-              <ul className="flex gap-12 mr-12">
-                <li>
-                  <a
-                    href="../index.html"
-                    className="text-gray-300 transition duration-200 hover:text-white"
-                  >
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="cuisines.html"
-                    className="text-white font-semibold hover:drop-shadow-[1px_0.5px_4.5px_white] transition duration-200"
-                  >
-                    Cuisines
-                  </a>
-                </li>
-              </ul>
-
-              <button className="bg-gradient-to-r from-orange-500 to-red-600 px-8 py-2 rounded-full mr-4 hover:from-orange-400 hover:to-red-500 transition duration-200 hover:shadow-sm shadow-gray-600">
-                <a href="#" className="text-white font-bold">
-                  Login
-                </a>
-              </button>
-            </div>
-          </nav>
-        </div>
-
+        <Navbar />
         <div className="text-white px-4 py-8">
           <div className="max-w-6xl mx-auto">
             {/* <!-- Header --> */}
@@ -150,12 +118,7 @@ const Detail = () => {
           </div>
         </div>
 
-        {/* <!-- Footer --> */}
-        <footer className="bg-gray-900/80 border-t border-gray-700/50 py-8 px-4 mt-12">
-          <div className="max-w-6xl mx-auto text-center text-gray-400">
-            <p>&copy; 2025 Restaurant Fun. Andy.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
