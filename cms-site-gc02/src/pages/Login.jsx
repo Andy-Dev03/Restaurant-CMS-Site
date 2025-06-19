@@ -1,4 +1,23 @@
+import axios from "axios";
+import { useState } from "react";
+
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const formLogin = async (event) => {
+    event.preventDefault();
+
+    const { data } = await axios.post("http://localhost:3000/login", {
+      email,
+      password,
+    });
+
+    console.log(data);
+
+    localStorage.setItem("accessToken", data.accessToken);
+  };
+
   return (
     <>
       <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 min-h-screen flex items-center justify-center">
@@ -7,13 +26,15 @@ const Login = () => {
             <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-purple-400 bg-clip-text text-transparent drop-shadow-[1.5px_0.5px_1px_black] ">
               CMS LOGIN
             </h1>
-            <p class="text-gray-600 mt-2 font-semibold">Only Admin & Staff</p>
+            <p className="text-gray-600 mt-2 font-semibold">
+              Only Admin & Staff
+            </p>
           </div>
 
-          <form action="" className="space-y-6">
+          <form className="space-y-6" onSubmit={formLogin}>
             <div>
               <label
-                for="email"
+                htmlFor="email"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Email
@@ -24,12 +45,14 @@ const Login = () => {
                 name="email"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
                 placeholder="Enter your email"
+                onChange={(event) => setEmail(event.target.value)}
+                value={email}
               />
             </div>
 
             <div>
               <label
-                for="password"
+                htmlFor="password"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Password
@@ -40,6 +63,8 @@ const Login = () => {
                 name="password"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
                 placeholder="Enter your password"
+                onChange={(event) => setPassword(event.target.value)}
+                value={password}
               />
             </div>
 
