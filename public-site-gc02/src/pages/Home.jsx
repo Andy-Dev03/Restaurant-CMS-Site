@@ -1,13 +1,12 @@
 import { useState } from "react";
 
 import HomeCard from "../components/HomeCard";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-const Home = ({ cuisines }) => {
+
+const Home = () => {
+  // const [feature, setFeature] = useState
   return (
     <>
       <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 min-h-screen">
-        <Navbar />
         {/* <!-- First Section --> */}
         <section className="px-4 py-32 text-center text-white bg-gradient-to-r from-blue-600/20 via-transparent to-orange-600/20">
           <div className="max-w-4xl mx-auto">
@@ -39,7 +38,7 @@ const Home = ({ cuisines }) => {
                 className="w-full pl-12 pr-4 py-4 bg-gray-700/80 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 border border-gray-600/50 transition duration-200"
               />
               <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl pointer-events-none">
-                🔍
+                <i className="fa-solid fa-magnifying-glass"></i>
               </span>
             </div>
 
@@ -86,7 +85,7 @@ const Home = ({ cuisines }) => {
               ALL CUISINES
             </h2>
 
-            <HomeCard cuisines={cuisines} />
+            <HomeCard />
           </div>
         </section>
 
@@ -108,8 +107,6 @@ const Home = ({ cuisines }) => {
             →
           </button>
         </div>
-
-        <Footer />
       </div>
     </>
   );

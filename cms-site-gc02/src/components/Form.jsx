@@ -2,6 +2,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const Form = ({ showNHide, setShowNHide }) => {
+  //token
+  const token = localStorage.getItem("accessToken");
+
   //For form to create
   const [formData, setFormData] = useState({
     name: "",
@@ -30,7 +33,6 @@ const Form = ({ showNHide, setShowNHide }) => {
   //Get Categories
   const [getCategories, setCategories] = useState([]);
 
-  const token = localStorage.getItem("accessToken");
   useEffect(() => {
     const getTheCategories = async () => {
       const { data } = await axios.get("http://localhost:3000/categories", {
