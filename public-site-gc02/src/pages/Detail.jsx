@@ -1,12 +1,25 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router";
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 const Detail = () => {
+  const [cuisineDetail, setCuisineDetail] = useState({});
+  const { id } = useParams();
+
+  useEffect(() => {
+    const getDetailCuisines = async () => {
+      const { data } = await axios.get(
+        `http://localhost:3000/pub/cuisines/${id}`
+      );
+
+      setCuisineDetail(data.data);
+    };
+
+    getDetailCuisines();
+  }, []);
   return (
     <>
       <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 min-h-screen">
-        <Navbar />
         <div className="text-white px-4 py-8">
           <div className="max-w-6xl mx-auto">
             {/* <!-- Header --> */}
@@ -21,62 +34,69 @@ const Detail = () => {
 
             {/* <!-- Back Button --> */}
             <div className="mb-8">
-              <a
-                href="cuisines.html"
+              <Link
+                to={{
+                  pathname: "/",
+                }}
                 className="inline-flex items-center gap-2 bg-gray-800/50 hover:bg-gray-700/50 px-4 py-2 rounded-lg transition duration-200 text-gray-300 hover:text-white border border-gray-600/50"
               >
                 <span className="font-bold text-2xl">←</span>
                 Back to Cuisines
-              </a>
+              </Link>
             </div>
 
             {/* <!-- Detail Section --> */}
             <div className="px-4 py-12 text-center text-white bg-gradient-to-r from-orange-600/20 via-transparent to-purple-600/20 rounded-xl border border-gray-700/30 shadow-2xl">
               <h2 className="text-4xl font-bold mb-12 bg-gradient-to-r from-orange-700 via-orange-100 to-purple-700 bg-clip-text text-transparent">
-                Detail Of -Name-
+                Detail Of {cuisineDetail.name}
               </h2>
 
               {/* <!-- Detail Card --> */}
-              <div className="bg-gradient-to-br from-white/95 to-gray-100/95 rounded-2xl text-gray-800 max-w-4xl mx-auto overflow-hidden shadow-2xl border border-gray-200">
+              <div className="bg-gradient-to-br from-white/95 to-gray-100/95 rounded-2xl text-gray-800 max-w-2xl mx-auto overflow-hidden shadow-2xl border border-gray-500">
                 {/* <!-- Image Section --> */}
-                <div className="relative h-64 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
-                  <span className="text-white text-8xl">🍝</span>
-                </div>
+                <img
+                  src={cuisineDetail.imgUrl}
+                  alt={cuisineDetail.name}
+                  className="w-full h-100 object-cover object-center"
+                />
 
                 {/* <!-- Content Section --> */}
-                <div className="p-8 text-left">
-                  <div className="grid md:grid-cols-2 gap-8">
+                <div className="p-8">
+                  <div className="grid md:grid-cols-3 gap-8">
                     {/* <!-- Left Column --> */}
                     <div className="space-y-6">
                       <div>
                         <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
-                          Restaurant Name
-                        </h3>
-                        <p className="text-2xl font-bold text-gray-800">
-                          Bella Italia
-                        </p>
-                      </div>
-
-                      <div>
-                        <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
                           Price
                         </h3>
-                        <div className="flex items-center gap-2 text-center">
-                          <span className="text-2xl font-bold text-green-600">
-                            Rp
-                          </span>
-                          <span className="text-gray-600 text-xl">10.000</span>
+
+                        <div className="inline-block">
+                          <div className="flex items-center gap-2 text-center">
+                            <div>
+                              <span className="text-xl font-bold text-green-600">
+                                Rp
+                              </span>
+                            </div>
+
+                            <div>
+                              <span className="text-gray-600 text-xl">
+                                {cuisineDetail.price &&
+                                  cuisineDetail.price.toLocaleString("id-ID")}
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
+                    </div>
 
-                      <div>
-                        <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
-                          Category
-                        </h3>
-                        <span className="inline-block bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
-                          name
-                        </span>
-                      </div>
+                    {/* Center */}
+                    <div className="space-y-6">
+                      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
+                        Category
+                      </h3>
+                      <span className="inline-block bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium border border-black/20">
+                        {cuisineDetail.Category && cuisineDetail.Category.name}
+                      </span>
                     </div>
 
                     {/* <!-- Right Column --> */}
@@ -85,12 +105,21 @@ const Detail = () => {
                         <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
                           Created By
                         </h3>
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
-                            <span className="text-white font-bold">A</span>
-                          </div>
-                          <div>
-                            <p className="font-semibold text-gray-800">Andy</p>
+                        <div className="inline-block ">
+                          <div className="flex gap-3 items-center">
+                            <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
+                              <span className="text-white font-bold">
+                                {cuisineDetail.User &&
+                                  cuisineDetail.User.username[0].toUpperCase()}
+                              </span>
+                            </div>
+                            <div>
+                              <p className="font-semibold text-gray-800">
+                                {cuisineDetail.User &&
+                                  cuisineDetail.User.username[0].toUpperCase() +
+                                    cuisineDetail.User.username.slice(1)}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -98,18 +127,12 @@ const Detail = () => {
                   </div>
 
                   {/* <!-- Description Section --> */}
-                  <div className="mt-8 pt-8 border-t border-gray-200">
+                  <div className="mt-8 pt-8 border-t border-gray-200 text-justify">
                     <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">
                       Description
                     </h3>
                     <p className="text-gray-700 leading-relaxed text-lg">
-                      Experience authentic Italian cuisine at Bella Italia,
-                      where traditional recipes meet modern culinary techniques.
-                      Our passionate chefs use only the finest imported
-                      ingredients to create dishes that transport you straight
-                      to the heart of Italy. From handmade pasta to wood-fired
-                      pizzas, every meal is crafted with love and attention to
-                      detail.
+                      {cuisineDetail.description}
                     </p>
                   </div>
                 </div>
@@ -117,8 +140,6 @@ const Detail = () => {
             </div>
           </div>
         </div>
-
-        <Footer />
       </div>
     </>
   );

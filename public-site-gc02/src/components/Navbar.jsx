@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const Navbar = () => {
   return (
     <>
@@ -10,20 +12,14 @@ const Navbar = () => {
             </p>
             <ul className="flex gap-12 mr-12">
               <li>
-                <a
-                  href="../index.html"
-                  className="text-white font-semibold drop-shadow-[1px_0.5px_4.5px_white]"
-                >
+                <span className="text-white font-semibold drop-shadow-[1px_0.5px_4.5px_white]">
                   Home
-                </a>
+                </span>
               </li>
               <li>
-                <a
-                  href="cuisines.html"
-                  className="text-white font-semibold drop-shadow-[1px_0.5px_4.5px_white]"
-                >
+                <span className="text-white font-semibold drop-shadow-[1px_0.5px_4.5px_white]">
                   Cuisines
-                </a>
+                </span>
               </li>
             </ul>
 

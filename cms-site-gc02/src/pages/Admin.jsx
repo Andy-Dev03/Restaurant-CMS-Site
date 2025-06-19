@@ -11,6 +11,17 @@ const Admin = () => {
     setShowNHide("editCuisines");
   };
 
+  // Delte cuisines
+  const token = localStorage.getItem("accessToken");
+  const deleteCuisines = async () => {
+    await axios.delete("http://localhost:3000/cuisines/22", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+
+  // Get cuisines
   useEffect(() => {
     const getTheCuisines = async () => {
       const token = localStorage.getItem("accessToken");
@@ -122,12 +133,12 @@ const Admin = () => {
                         </div>
 
                         <div className="block">
-                          <a
-                            href="#"
+                          <button
                             className="text-red-600 hover:text-red-900 flex items-center"
+                            onClick={deleteCuisines}
                           >
                             <i className="fas fa-trash mr-3"></i> Delete
-                          </a>
+                          </button>
                         </div>
                       </td>
                     </tr>
