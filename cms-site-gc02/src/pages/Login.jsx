@@ -13,6 +13,8 @@ const Login = () => {
       password,
     });
 
+    console.log(data);
+
     localStorage.setItem("accessToken", data.accessToken);
   };
 
@@ -24,13 +26,15 @@ const Login = () => {
             <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-purple-400 bg-clip-text text-transparent drop-shadow-[1.5px_0.5px_1px_black] ">
               CMS LOGIN
             </h1>
-            <p class="text-gray-600 mt-2 font-semibold">Only Admin & Staff</p>
+            <p className="text-gray-600 mt-2 font-semibold">
+              Only Admin & Staff
+            </p>
           </div>
 
           <form className="space-y-6" onSubmit={formLogin}>
             <div>
               <label
-                for="email"
+                htmlFor="email"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Email
@@ -48,7 +52,7 @@ const Login = () => {
 
             <div>
               <label
-                for="password"
+                htmlFor="password"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Password

@@ -1,14 +1,28 @@
-const HomeCard = ({ cuisines }) => {
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+const HomeCard = () => {
+  const [getPubCuisines, setPubCuisines] = useState([]);
+
+  useEffect(() => {
+    const getThePubCuisines = async () => {
+      const { data } = await axios.get("http://localhost:3000/pub/cuisines");
+
+      setPubCuisines(data.data);
+    };
+
+    getThePubCuisines();
+  }, []);
   return (
     <>
       <div className="grid md:grid-cols-3 gap-8">
         {/* <!-- Card --> */}
-        {cuisines.map((c) => (
+        {getPubCuisines.map((c) => (
           <div
             key={c.id}
             className="group relative bg-gradient-to-br from-gray-800/90 to-gray-900/90 rounded-2xl overflow-hidden hover:from-gray-700/90 hover:to-gray-800/90 transition-all duration-500 shadow-2xl hover:shadow-blue-500/25 transform hover:-translate-y-3 border border-gray-700/50 hover:border-blue-500/50"
           >
-            <div className="h-64 flex items-center justify-center overflow-hidden">
+            <div className="h-42 flex items-center justify-center overflow-hidden">
               <img
                 src={c.imgUrl}
                 alt={c.name}

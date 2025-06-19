@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const Form = ({ showNHide, setShowNHide }) => {
+  //For form to create
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -10,6 +11,23 @@ const Form = ({ showNHide, setShowNHide }) => {
     categoryId: "",
   });
 
+  const postNewCuisine = async () => {
+    await axios.post("http://localhost:3000/cuisines", formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+
+  const btnChangeCreate = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  //Get Categories
   const [getCategories, setCategories] = useState([]);
 
   const token = localStorage.getItem("accessToken");
@@ -25,25 +43,6 @@ const Form = ({ showNHide, setShowNHide }) => {
 
     getTheCategories();
   }, []);
-
-  const postNewCuisine = async (event) => {
-    event.preventDefault();
-
-    await axios.post("http://localhost:3000/cuisines", formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    setShowNHide("listCuisines");
-  };
-
-  const btnChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
 
   const backToList = (event) => {
     event.preventDefault();
@@ -67,7 +66,7 @@ const Form = ({ showNHide, setShowNHide }) => {
               name="name"
               className="w-full px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               placeholder="Enter entity name"
-              onChange={btnChange}
+              onChange={btnChangeCreate}
               value={formData.name}
             />
           </div>
@@ -84,7 +83,7 @@ const Form = ({ showNHide, setShowNHide }) => {
               id="price"
               name="price"
               className="w-full px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
-              onChange={btnChange}
+              onChange={btnChangeCreate}
               value={formData.price}
             />
           </div>
@@ -104,7 +103,7 @@ const Form = ({ showNHide, setShowNHide }) => {
               name="imgUrl"
               className="w-full px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               placeholder="https://example.com/image.jpg"
-              onChange={btnChange}
+              onChange={btnChangeCreate}
               value={formData.imgUrl}
             />
           </div>
@@ -120,7 +119,7 @@ const Form = ({ showNHide, setShowNHide }) => {
               id="categoryId"
               name="categoryId"
               className="w-full px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
-              onChange={btnChange}
+              onChange={btnChangeCreate}
               value={formData.categoryId}
             >
               <option value="" disabled>
@@ -148,8 +147,8 @@ const Form = ({ showNHide, setShowNHide }) => {
             rows="6"
             className="w-full px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
             placeholder="Enter your description here..."
+            onChange={btnChangeCreate}
             value={formData.description}
-            onChange={btnChange}
           ></textarea>
         </div>
 

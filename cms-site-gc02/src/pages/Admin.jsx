@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-
 import Form from "../components/Form";
 import Sidebar from "../components/Sidebar";
+
 const Admin = () => {
   const [showNHide, setShowNHide] = useState("listCuisines");
   const [getCuisines, setCuisines] = useState([]);
@@ -113,7 +113,6 @@ const Admin = () => {
                       <td className="px-6 py-4 text-sm text-gray-900 border border-gray-200">
                         <div className="block py-4">
                           <button
-                            // href="#"
                             className="text-blue-600 hover:text-blue-900 mr-3 flex items-center"
                             onClick={btnClick}
                           >

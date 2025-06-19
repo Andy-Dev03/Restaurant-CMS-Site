@@ -2,11 +2,6 @@ import { useState } from "react";
 
 import Home from "./pages/Home.jsx";
 import Detail from "./pages/Detail.jsx";
-import Login from "./pages/Login.jsx";
-import Admin from "./pages/Admin.jsx";
-import Create from "./pages/Create.jsx";
-import Upload from "./pages/Upload.jsx";
-import Add from "./pages/Add.jsx";
 
 function App() {
   const [cuisines] = useState([
@@ -55,11 +50,6 @@ function App() {
     <>
       <Home cuisines={cuisines} />
       <Detail />
-      <Login />
-      <Admin />
-      <Create />
-      <Upload />
-      <Add />
     </>
   );
 }

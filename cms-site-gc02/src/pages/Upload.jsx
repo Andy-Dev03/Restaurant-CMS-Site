@@ -1,6 +1,6 @@
 import { useState } from "react";
-
 import Sidebar from "../components/Sidebar";
+
 const Upload = () => {
   return (
     <>
@@ -16,7 +16,7 @@ const Upload = () => {
           <form className="space-y-6">
             <div>
               <label
-                for="entityName"
+                htmlFor="entityName"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Entity Name
@@ -32,7 +32,7 @@ const Upload = () => {
 
             <div>
               <label
-                for="imageFile"
+                htmlFor="imageFile"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Select Image File
