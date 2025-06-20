@@ -6,17 +6,19 @@ const Detail = () => {
   const [cuisineDetail, setCuisineDetail] = useState({});
   const { id } = useParams();
 
+  const fetchDetail = async () => {
+    const { data } = await axios.get(
+      `http://localhost:3000/pub/cuisines/${id}`
+    );
+    // console.log(data);
+
+    setCuisineDetail(data?.data);
+  };
+
   useEffect(() => {
-    const getDetailCuisines = async () => {
-      const { data } = await axios.get(
-        `http://localhost:3000/pub/cuisines/${id}`
-      );
-
-      setCuisineDetail(data.data);
-    };
-
-    getDetailCuisines();
+    fetchDetail();
   }, []);
+
   return (
     <>
       <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 min-h-screen">
@@ -48,15 +50,15 @@ const Detail = () => {
             {/* <!-- Detail Section --> */}
             <div className="px-4 py-12 text-center text-white bg-gradient-to-r from-orange-600/20 via-transparent to-purple-600/20 rounded-xl border border-gray-700/30 shadow-2xl">
               <h2 className="text-4xl font-bold mb-12 bg-gradient-to-r from-orange-700 via-orange-100 to-purple-700 bg-clip-text text-transparent">
-                Detail Of {cuisineDetail.name}
+                Detail Of {cuisineDetail?.name}
               </h2>
 
               {/* <!-- Detail Card --> */}
               <div className="bg-gradient-to-br from-white/95 to-gray-100/95 rounded-2xl text-gray-800 max-w-2xl mx-auto overflow-hidden shadow-2xl border border-gray-500">
                 {/* <!-- Image Section --> */}
                 <img
-                  src={cuisineDetail.imgUrl}
-                  alt={cuisineDetail.name}
+                  src={cuisineDetail?.imgUrl}
+                  alt={cuisineDetail?.name}
                   className="w-full h-100 object-cover object-center"
                 />
 
@@ -80,8 +82,7 @@ const Detail = () => {
 
                             <div>
                               <span className="text-gray-600 text-xl">
-                                {cuisineDetail.price &&
-                                  cuisineDetail.price.toLocaleString("id-ID")}
+                                {cuisineDetail?.price?.toLocaleString("id-ID")}
                               </span>
                             </div>
                           </div>
@@ -95,7 +96,7 @@ const Detail = () => {
                         Category
                       </h3>
                       <span className="inline-block bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium border border-black/20">
-                        {cuisineDetail.Category && cuisineDetail.Category.name}
+                        {cuisineDetail?.Category?.name}
                       </span>
                     </div>
 
@@ -132,7 +133,7 @@ const Detail = () => {
                       Description
                     </h3>
                     <p className="text-gray-700 leading-relaxed text-lg">
-                      {cuisineDetail.description}
+                      {cuisineDetail?.description}
                     </p>
                   </div>
                 </div>
