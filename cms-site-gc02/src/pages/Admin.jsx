@@ -1,27 +1,68 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Form from "../components/Form";
-import TabelEntitiy from "../components/TabelEntity";
+import Toastify from "toastify-js";
 
 const Admin = () => {
-  // Exist the list or edit
-  const [showNHide, setShowNHide] = useState("listCuisines");
-
-  // Form penampung cuisine per id
-  const [formCuisine, setFormCuisine] = useState(null);
-
   // Get Cuisines
   const [getCuisines, setCuisines] = useState([]);
 
   const fetchCuisines = async () => {
-    const token = localStorage.getItem("accessToken");
-
     const { data } = await axios.get("http://localhost:3000/cuisines", {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.accessToken}`,
       },
     });
     setCuisines(data.data);
+  };
+
+  // Delete
+  const deleteButton = async (id) => {
+    try {
+      const token = localStorage.getItem("accessToken");
+      const { data } = await axios.delete(
+        `http://localhost:3000/cuisines/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      fetchCuisines();
+      Toastify({
+        text: data.data.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "#34D399",
+          color: "black",
+          border: "solid #000000",
+          borderRadius: "8px",
+          boxShadow: "2px 2px black",
+        },
+      }).showToast();
+    } catch (error) {
+      Toastify({
+        text: error.response.data.error.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "#F87171",
+          color: "black",
+          border: "solid #000000",
+          borderRadius: "8px",
+          boxShadow: "2px 2px black",
+        },
+      }).showToast();
+    }
   };
 
   useEffect(() => {
@@ -31,25 +72,109 @@ const Admin = () => {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-4 min-h-screen overflow-y-auto">
-        {showNHide === "listCuisines" && (
-          <TabelEntitiy
-            getCuisines={getCuisines}
-            fetchCuisines={fetchCuisines}
-            setShowNHide={setShowNHide}
-            setFormCuisine={setFormCuisine}
-          />
-        )}
-        <div className="bg-white col-span-3 p-6">
+        <div className="bg-white col-span-3 p-6 min-w-screen">
           <div className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Edit Entity</h2>
-            <p className="text-gray-600">Update your data to the databased</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              Entity List
+            </h2>
+            <p className="font-semibold text-gray-600">All the entitiy </p>
           </div>
-          <Form
-            showNHide={showNHide}
-            setShowNHide={setShowNHide}
-            setFormCuisine={setFormCuisine}
-            formCuisine={formCuisine}
-          />
+
+          <div className="bg-white rounded-lg overflow-hidden">
+            <table className="min-w-full">
+              <thead className="bg-gray-900">
+                <tr>
+                  <th className="px-4 py-3 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                    ID
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                    Name
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                    Description
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                    Price
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                    ImageUrl
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                    createdAt
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                    updatedAt
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                    categoryId
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                    authorId
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody className="text-center bg-white divide-y divide-gray-200">
+                {getCuisines.map((c) => (
+                  <tr key={c.id}>
+                    <td className="px-6 py-4 text-sm text-gray-900 border border-gray-200">
+                      {c.id}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 max-w-40 border truncate border-gray-200">
+                      {c.name}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 max-w-40 truncate border border-gray-200">
+                      {c.description}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 border border-gray-200">
+                      {c.price.toLocaleString("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                      })}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 max-w-40 truncate border border-gray-200">
+                      {c.imgUrl}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 border border-gray-200">
+                      {new Date(c.createdAt).toLocaleDateString("id-ID")}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 border border-gray-200">
+                      {new Date(c.updatedAt).toLocaleDateString("id-ID")}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 border border-gray-200">
+                      {c.categoryId}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 border border-gray-200">
+                      {c.authorId}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 border border-gray-200">
+                      <div className="block py-4">
+                        <button
+                          // href="#"
+                          className="text-blue-600 hover:text-blue-900 mr-3 flex items-center"
+                        >
+                          <i className="fas fa-edit text-center mr-3"></i> Edit
+                        </button>
+                      </div>
+
+                      <div className="block">
+                        <button
+                          href="#"
+                          className="text-red-600 hover:text-red-900 flex items-center"
+                          onClick={() => deleteButton(c.id)}
+                        >
+                          <i className="fas fa-trash mr-3"></i> Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>

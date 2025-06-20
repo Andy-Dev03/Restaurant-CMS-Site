@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 
 const Sidebar = () => {
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 col-span-1 text-white p-6">
+    <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 col-span-1 text-white p-6 sticky top-0 h-screen">
       <div className="mb-8">
         <h1 className="font-bold text-2xl">CMS Admin</h1>
       </div>
@@ -32,19 +32,6 @@ const Sidebar = () => {
           }
         >
           <i className="fa-solid fa-plus mr-3"></i>Create Entity
-        </NavLink>
-
-        <NavLink
-          to="/upload"
-          className={({ isActive }) =>
-            `flex items-center px-3 py-2 rounded-lg ${
-              isActive
-                ? "bg-gray-800 text-white"
-                : "hover:bg-gray-800 hover:text-white"
-            }`
-          }
-        >
-          <i className="fa-solid fa-upload mr-3"></i>Upload Image
         </NavLink>
 
         <NavLink

@@ -6,6 +6,7 @@ import Create from "../pages/Create.jsx";
 import Login from "../pages/Login.jsx";
 import Upload from "../pages/Upload.jsx";
 import RootLayout from "../layouts/RootLayout.jsx";
+import Edit from "../pages/Edit.jsx";
 
 const Router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const Router = createBrowserRouter([
       {
         path: "/",
         element: <Admin />,
+      },
+      {
+        path: "/:id",
+        element: <Edit />,
       },
       {
         path: "/create",
