@@ -2,10 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const Form = ({ showNHide, setShowNHide }) => {
-  //token
-  const token = localStorage.getItem("accessToken");
-
-  //For form to create
+  //Create
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -33,6 +30,7 @@ const Form = ({ showNHide, setShowNHide }) => {
   //Get Categories
   const [getCategories, setCategories] = useState([]);
 
+  const token = localStorage.getItem("accessToken");
   useEffect(() => {
     const getTheCategories = async () => {
       const { data } = await axios.get("http://localhost:3000/categories", {
@@ -46,10 +44,12 @@ const Form = ({ showNHide, setShowNHide }) => {
     getTheCategories();
   }, []);
 
-  const backToList = (event) => {
+  const goEntitiyList = (event) => {
     event.preventDefault();
     setShowNHide("listCuisines");
   };
+
+  // Edit
 
   return (
     <>
@@ -155,11 +155,11 @@ const Form = ({ showNHide, setShowNHide }) => {
         </div>
 
         <div className="flex justify-end space-x-4">
-          {showNHide === "editCuisines" && (
+          {showNHide === "editCuisine" && (
             <button
               type="button"
               className="px-4 py-2 border border-black text-black font-semibold rounded-md hover:bg-red-600/70 hover:text-white"
-              onClick={backToList}
+              onClick={goEntitiyList}
             >
               Cancel
             </button>
@@ -169,7 +169,7 @@ const Form = ({ showNHide, setShowNHide }) => {
             type="submit"
             className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-600"
           >
-            Create Entity
+            {showNHide === "editCuisine" ? "Update Entitiy" : "Create Entity"}
           </button>
         </div>
       </form>

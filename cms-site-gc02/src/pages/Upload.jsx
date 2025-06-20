@@ -1,12 +1,9 @@
 import { useState } from "react";
-import Sidebar from "../components/Sidebar";
 
 const Upload = () => {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-4 min-h-screen overflow-y-auto">
-        <Sidebar />
-
         <div className="bg-white col-span-3 p-6">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-gray-900">Upload Image</h2>
