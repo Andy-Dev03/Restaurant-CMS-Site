@@ -20,7 +20,7 @@ const Create = () => {
 
       navigate("/");
       Toastify({
-        text: data.data.message,
+        text: `Success add ${data.data.name} to entity`,
         duration: 3000,
         newWindow: true,
         close: true,
@@ -38,8 +38,17 @@ const Create = () => {
         },
       }).showToast();
     } catch (error) {
+      const errorData = error.response?.data?.error?.message;
+      let errorText;
+
+      if (Array.isArray(errorData)) {
+        errorText = errorData[0];
+      } else if (typeof errorData === "string") {
+        errorText = errorData;
+      }
+
       Toastify({
-        text: error.response.data.error.message,
+        text: errorText,
         duration: 3000,
         newWindow: true,
         close: true,
@@ -61,8 +70,8 @@ const Create = () => {
 
   return (
     <>
-      <div className=" min-h-screen overflow-y-auto pb-12 md:pb-0">
-        <div className="bg-white col-span-3 p-6">
+      <div className=" min-h-screen pb-24 md:pb-0 md:p-6 p-4">
+        <div className="bg-white col-span-3">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-gray-900">
               Create New Entity

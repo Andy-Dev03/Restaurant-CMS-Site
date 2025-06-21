@@ -16,13 +16,13 @@ const Router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    // loader: () => {
-    //   const token = localStorage.getItem("accessToken");
-    //   if (!token) {
-    //     return redirect("/login");
-    //   }
-    //   return null;
-    // },
+    loader: () => {
+      const token = localStorage.getItem("accessToken");
+      if (!token) {
+        return redirect("/login");
+      }
+      return null;
+    },
     children: [
       {
         path: "/",

@@ -1,22 +1,85 @@
 import axios from "axios";
+import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import Toastify from "toastify-js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const formLogin = async (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
+    try {
+      const { data } = await axios.post("http://localhost:3000/login", {
+        email,
+        password,
+      });
 
-    const { data } = await axios.post("http://localhost:3000/login", {
-      email,
-      password,
-    });
-
-    console.log(data);
-
-    localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("accessToken", data.accessToken);
+      navigate("/");
+      Toastify({
+        text: "Success Login",
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
+        style: {
+          background: "#34D399",
+          color: "black",
+          border: "solid #000000",
+          borderRadius: "8px",
+          boxShadow: "2px 2px black",
+          paddingRight: "2.5rem",
+        },
+      }).showToast();
+    } catch (error) {
+      Toastify({
+        text: error.response.data.error.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
+        style: {
+          background: "#F87171",
+          color: "black",
+          border: "solid #000000",
+          borderRadius: "8px",
+          boxShadow: "2px 2px black",
+          paddingRight: "2.5rem",
+        },
+      }).showToast();
+    }
   };
+
+  useEffect(() => {
+    if (localStorage.accessToken) {
+      Toastify({
+        text: "You already logged in",
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "#F87171",
+          color: "black",
+          border: "solid #000000",
+          borderRadius: "8px",
+          boxShadow: "2px 2px black",
+        },
+      }).showToast();
+      navigate("/");
+    }
+  }, [navigate]);
 
   return (
     <>
@@ -31,7 +94,7 @@ const Login = () => {
             </p>
           </div>
 
-          <form className="space-y-6" onSubmit={formLogin}>
+          <form className="space-y-6" onSubmit={handleLogin}>
             <div>
               <label
                 htmlFor="email"

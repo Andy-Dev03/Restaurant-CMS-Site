@@ -92,8 +92,8 @@ const Upload = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
-      <div className="bg-white col-span-3 p-6">
+    <div className="min-h-screen p-4 md:p-6">
+      <div className="bg-white col-span-3">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-900">Upload Image</h2>
           <p className="text-gray-600">Upload image for entity</p>
@@ -132,6 +132,7 @@ const Upload = () => {
               <button
                 type="button"
                 className="px-4 py-2 border border-black text-black font-semibold rounded-md hover:bg-red-600/70 hover:text-white"
+                hidden={loading}
               >
                 Cancel
               </button>

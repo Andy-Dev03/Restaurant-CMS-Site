@@ -95,7 +95,7 @@ const Admin = () => {
 
   return (
     <>
-      <div className="pb-18 md:p-6  ">
+      <div className="md:p-6 p-4 pb-24">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Entity List</h2>
           <p className="font-semibold text-gray-600">All the entities </p>

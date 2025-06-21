@@ -17,9 +17,7 @@ const RootLayout = () => {
 
         {/* Main content area */}
         <div className="flex-1 min-w-0 ">
-          <div className="p-4 md:p-0">
-            <Outlet />
-          </div>
+          <Outlet />
         </div>
       </div>
 

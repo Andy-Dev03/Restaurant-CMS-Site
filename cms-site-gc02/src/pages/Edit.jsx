@@ -100,7 +100,7 @@ const Edit = () => {
   }, []);
   return (
     <>
-      <div className="md:p-6 pb-18">
+      <div className="md:p-6 pb-24 p-4 md:pb-0">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-900">Edit Entity</h2>
           <p className="text-gray-600">Update your data to the databased</p>
