@@ -87,6 +87,18 @@ const TabelCategories = ({ isError }) => {
           </div>
         ))}
       </div>
+
+      {/* When the cuisines is empty */}
+      {getCategories.length === 0 && (
+        <div className="text-center py-12">
+          <div className="text-gray-400 text-6xl mb-4">
+            <i className="fa-solid fa-database"></i>
+          </div>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">
+            No categories found
+          </h3>
+        </div>
+      )}
     </>
   );
 };

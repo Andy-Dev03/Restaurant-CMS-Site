@@ -136,7 +136,7 @@ const Form = ({ propName, handleSubmit, getDetailCuisine, isEdit }) => {
               Image URL
             </label>
             <input
-              type="url"
+              type="text"
               id="imgUrl"
               name="imgUrl"
               className="w-full px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"

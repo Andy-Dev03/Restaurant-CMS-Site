@@ -74,8 +74,17 @@ const Edit = () => {
         },
       }).showToast();
     } catch (error) {
+      const errorData = error.response?.data?.error?.message;
+      let errorText;
+
+      if (Array.isArray(errorData)) {
+        errorText = errorData[0];
+      } else if (typeof errorData === "string") {
+        errorText = errorData;
+      }
+
       Toastify({
-        text: error.response.data.error.message,
+        text: errorText,
         duration: 3000,
         newWindow: true,
         close: true,
