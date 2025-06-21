@@ -1,15 +1,63 @@
-import { useState } from "react";
 import FormUser from "../components/FormUser";
-
+import Toastify from "toastify-js";
+import axios from "axios";
 const Add = () => {
   // Post new User
-  const [formAddUser, setFormAddUser] = useState({
-    username: "",
-    phoneNumber: "",
-    email: "",
-    password: "",
-    address: "",
-  });
+  const postNewUser = async (event, formAddUser) => {
+    event.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3000/add-user",
+        formAddUser,
+        {
+          headers: { Authorization: `Bearer ${localStorage.accessToken}` },
+        }
+      );
+
+      Toastify({
+        text: `Success add ${data.data.username} to the Staff`,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "#34D399",
+          color: "black",
+          border: "solid #000000",
+          borderRadius: "8px",
+          boxShadow: "2px 2px black",
+        },
+      }).showToast();
+    } catch (error) {
+      const errorData = error.response?.data?.error?.message;
+      let errorText;
+
+      if (Array.isArray(errorData)) {
+        errorText = errorData[0];
+      } else if (typeof errorData === "string") {
+        errorText = errorData;
+      }
+
+      Toastify({
+        text: errorText,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "#F87171",
+          color: "black",
+          border: "solid #000000",
+          borderRadius: "8px",
+          boxShadow: "2px 2px black",
+        },
+      }).showToast();
+    }
+  };
 
   return (
     <>
@@ -21,7 +69,7 @@ const Add = () => {
               Register a new staff to the Database
             </p>
           </div>
-          <FormUser formAddUser={formAddUser} setFormAddUser={setFormAddUser} />
+          <FormUser postNewUser={postNewUser} />
         </div>
       </div>
     </>

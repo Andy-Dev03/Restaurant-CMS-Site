@@ -1,22 +1,14 @@
-import axios from "axios";
+import { useState } from "react";
 
-const FormUser = ({ formAddUser, setFormAddUser }) => {
+const FormUser = ({ postNewUser }) => {
   // Post new User
-  const postNewUser = async (event) => {
-    event.preventDefault();
-    const token = localStorage.getItem("accessToken");
-    await axios.post("http://localhost:3000/add-user", formAddUser, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    setFormAddUser({
-      username: "",
-      phoneNumber: "",
-      email: "",
-      password: "",
-      address: "",
-    });
-  };
+  const [formAddUser, setFormAddUser] = useState({
+    username: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+    address: "",
+  });
 
   const btnChangeUser = (event) => {
     const { name, value } = event.target;
@@ -28,7 +20,12 @@ const FormUser = ({ formAddUser, setFormAddUser }) => {
 
   return (
     <>
-      <form className="space-y-6" onSubmit={postNewUser}>
+      <form
+        className="space-y-6"
+        onSubmit={(e) => {
+          postNewUser(e, formAddUser);
+        }}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label

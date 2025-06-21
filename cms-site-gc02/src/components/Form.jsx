@@ -2,55 +2,6 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const Form = ({ showNHide, setShowNHide }) => {
-  //Create
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    price: "",
-    imgUrl: "",
-    categoryId: "",
-  });
-
-  const postNewCuisine = async () => {
-    await axios.post("http://localhost:3000/cuisines", formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  };
-
-  const btnChangeCreate = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  //Get Categories
-  const [getCategories, setCategories] = useState([]);
-
-  const token = localStorage.getItem("accessToken");
-  useEffect(() => {
-    const getTheCategories = async () => {
-      const { data } = await axios.get("http://localhost:3000/categories", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setCategories(data.data);
-    };
-
-    getTheCategories();
-  }, []);
-
-  const goEntitiyList = (event) => {
-    event.preventDefault();
-    setShowNHide("listCuisines");
-  };
-
-  // Edit
-
   return (
     <>
       <form className="space-y-6" onSubmit={postNewCuisine}>
