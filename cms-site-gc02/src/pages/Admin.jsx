@@ -7,23 +7,43 @@ const Admin = () => {
   const [getCuisines, setCuisines] = useState([]);
 
   const fetchCuisines = async () => {
-    const { data } = await axios.get("http://localhost:3000/cuisines", {
-      headers: {
-        Authorization: `Bearer ${localStorage.accessToken}`,
-      },
-    });
-    setCuisines(data.data);
+    try {
+      const { data } = await axios.get("http://localhost:3000/cuisines", {
+        headers: {
+          Authorization: `Bearer ${localStorage.accessToken}`,
+        },
+      });
+      setCuisines(data.data);
+    } catch (error) {
+      Toastify({
+        text: error.response.data.error.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
+        style: {
+          background: "#F87171",
+          color: "black",
+          border: "solid #000000",
+          borderRadius: "8px",
+          boxShadow: "2px 2px black",
+          paddingRight: "2.5rem",
+        },
+      }).showToast();
+    }
   };
 
   // Delete
   const deleteButton = async (id) => {
     try {
-      const token = localStorage.getItem("accessToken");
       const { data } = await axios.delete(
         `http://localhost:3000/cuisines/${id}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${localStorage.accessToken}`,
           },
         }
       );
@@ -37,12 +57,14 @@ const Admin = () => {
         gravity: "bottom", // `top` or `bottom`
         position: "right", // `left`, `center` or `right`
         stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
         style: {
           background: "#34D399",
           color: "black",
           border: "solid #000000",
           borderRadius: "8px",
           boxShadow: "2px 2px black",
+          paddingRight: "2.5rem",
         },
       }).showToast();
     } catch (error) {
@@ -54,12 +76,14 @@ const Admin = () => {
         gravity: "bottom", // `top` or `bottom`
         position: "right", // `left`, `center` or `right`
         stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
         style: {
           background: "#F87171",
           color: "black",
           border: "solid #000000",
           borderRadius: "8px",
           boxShadow: "2px 2px black",
+          paddingRight: "2.5rem",
         },
       }).showToast();
     }
@@ -71,10 +95,10 @@ const Admin = () => {
 
   return (
     <>
-      <div className="pb-20 md:pb-0">
+      <div className="pb-18 md:p-6  ">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Entity List</h2>
-          <p className="font-semibold text-gray-600">All the entitiy </p>
+          <p className="font-semibold text-gray-600">All the entities </p>
         </div>
 
         <div className="hidden md:block rounded-lg border overflow-hidden">
@@ -143,16 +167,19 @@ const Admin = () => {
                       {new Date(c.updatedAt).toLocaleDateString("id-ID")}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900 border border-gray-200">
-                      {c.categoryId}
+                      {c.Category.name}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900 border border-gray-200">
-                      {c.authorId}
+                      {c.User.username}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900 border border-gray-200">
                       <div className="block ">
-                        <button className="text-blue-600 hover:text-blue-900 mr-3 flex items-center">
-                          <i className="fas fa-edit text-center mr-3"></i> Edit
-                        </button>
+                        <Link to={`/${c.id}`}>
+                          <button className="text-blue-600 hover:text-blue-900 mr-3 flex items-center">
+                            <i className="fas fa-edit text-center mr-3"></i>
+                            Edit
+                          </button>
+                        </Link>
                       </div>
 
                       <div className="block py-4">
@@ -164,14 +191,14 @@ const Admin = () => {
                         </button>
                       </div>
 
-                      <Link to={`/upload/${c.id}`}>
-                        <div className="block">
+                      <div className="block">
+                        <Link to={`/upload/${c.id}`}>
                           <button className="text-yellow-500 hover:text-yellow-800 flex items-center">
                             <i className="fa-solid fa-file-arrow-up mr-3"></i>{" "}
                             Upload
                           </button>
-                        </div>
-                      </Link>
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -215,10 +242,12 @@ const Admin = () => {
               </div>
 
               <div className="flex justify-end space-x-2 mt-4 pt-3 border-t">
-                <button className="flex items-center px-3 py-1 text-blue-600 hover:text-blue-900 ">
-                  <i className="fas fa-edit mr-1"></i>
-                  <span className="text-sm">Edit</span>
-                </button>
+                <Link to={`/${c.id}`}>
+                  <button className="flex items-center px-3 py-1 text-blue-600 hover:text-blue-900 ">
+                    <i className="fas fa-edit mr-1"></i>
+                    <span className="text-sm">Edit</span>
+                  </button>
+                </Link>
                 <button
                   onClick={() => deleteButton(c.id)}
                   className="flex items-center px-3 py-1 text-red-600 hover:text-red-900 "

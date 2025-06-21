@@ -17,14 +17,14 @@ const RootLayout = () => {
 
         {/* Main content area */}
         <div className="flex-1 min-w-0 ">
-          <div className="p-4 md:p-6">
+          <div className="p-4 md:p-0">
             <Outlet />
           </div>
         </div>
       </div>
 
       {/* When under md view */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white ">
         <nav className="flex justify-around py-2">
           <a href="/" className="flex flex-col items-center p-2 text-xs">
             <i className="fa-solid fa-list-ul text-lg mb-1"></i>

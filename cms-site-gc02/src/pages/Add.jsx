@@ -22,12 +22,14 @@ const Add = () => {
         gravity: "bottom", // `top` or `bottom`
         position: "right", // `left`, `center` or `right`
         stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
         style: {
           background: "#34D399",
           color: "black",
           border: "solid #000000",
           borderRadius: "8px",
           boxShadow: "2px 2px black",
+          paddingRight: "2.5rem",
         },
       }).showToast();
     } catch (error) {
@@ -48,12 +50,15 @@ const Add = () => {
         gravity: "bottom", // `top` or `bottom`
         position: "right", // `left`, `center` or `right`
         stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
         style: {
           background: "#F87171",
           color: "black",
           border: "solid #000000",
           borderRadius: "8px",
           boxShadow: "2px 2px black",
+          fontSize: "14px",
+          paddingRight: "2.5rem",
         },
       }).showToast();
     }
@@ -61,7 +66,7 @@ const Add = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-4 min-h-screen overflow-y-auto">
+      <div className="min-h-screen pb-12 md:pb-0">
         <div className="bg-white col-span-3 p-6">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-gray-900">Add New User</h2>

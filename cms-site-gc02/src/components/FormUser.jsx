@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import Button from "./Button";
 const FormUser = ({ postNewUser }) => {
   // Post new User
   const [formAddUser, setFormAddUser] = useState({
@@ -121,12 +122,7 @@ const FormUser = ({ postNewUser }) => {
         </div>
 
         <div className="flex justify-end space-x-4">
-          <button
-            type="submit"
-            className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-600"
-          >
-            Add User
-          </button>
+          <Button nameProp="Add Staff" />
         </div>
       </form>
     </>

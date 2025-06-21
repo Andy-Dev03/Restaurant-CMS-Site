@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, Link } from "react-router";
 import { useEffect } from "react";
 import Toastify from "toastify-js";
 
@@ -51,12 +51,14 @@ const Upload = () => {
         gravity: "bottom", // `top` or `bottom`
         position: "right", // `left`, `center` or `right`
         stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
         style: {
           background: "#34D399",
           color: "black",
           border: "solid #000000",
           borderRadius: "8px",
           boxShadow: "2px 2px black",
+          paddingRight: "2.5rem",
         },
       }).showToast();
 
@@ -70,12 +72,14 @@ const Upload = () => {
         gravity: "bottom", // `top` or `bottom`
         position: "right", // `left`, `center` or `right`
         stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
         style: {
           background: "#F87171",
           color: "black",
           border: "solid #000000",
           borderRadius: "8px",
           boxShadow: "2px 2px black",
+          paddingRight: "2.5rem",
         },
       }).showToast();
     } finally {
@@ -88,7 +92,7 @@ const Upload = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 min-h-screen overflow-y-auto">
+    <div className="min-h-screen">
       <div className="bg-white col-span-3 p-6">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-900">Upload Image</h2>
@@ -124,6 +128,14 @@ const Upload = () => {
           </div>
 
           <div className="flex justify-end space-x-4">
+            <Link to={"/"}>
+              <button
+                type="button"
+                className="px-4 py-2 border border-black text-black font-semibold rounded-md hover:bg-red-600/70 hover:text-white"
+              >
+                Cancel
+              </button>
+            </Link>
             <button
               type="submit"
               className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
