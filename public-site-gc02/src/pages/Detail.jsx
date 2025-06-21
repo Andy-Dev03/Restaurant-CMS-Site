@@ -1,18 +1,42 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useNavigate } from "react-router";
+import Toastify from "toastify-js";
 
 const Detail = () => {
+  const navigate = useNavigate();
   const [cuisineDetail, setCuisineDetail] = useState({});
   const { id } = useParams();
 
   const fetchDetail = async () => {
-    const { data } = await axios.get(
-      `http://localhost:3000/pub/cuisines/${id}`
-    );
-    // console.log(data);
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3000/pub/cuisines/${id}`
+      );
+      // console.log(data);
 
-    setCuisineDetail(data?.data);
+      setCuisineDetail(data?.data);
+    } catch (error) {
+      Toastify({
+        text: error.response.data.error.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
+        style: {
+          background: "#F87171",
+          color: "black",
+          border: "solid #000000",
+          borderRadius: "8px",
+          boxShadow: "2px 2px black",
+          paddingRight: "2.5rem",
+        },
+      }).showToast();
+      navigate("/");
+    }
   };
 
   useEffect(() => {

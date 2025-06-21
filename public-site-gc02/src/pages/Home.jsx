@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Toastify from "toastify-js";
 
 import HomeCard from "../components/HomeCard";
 
@@ -15,21 +16,63 @@ const Home = () => {
   const pagination = handlePagination();
 
   async function fetchPubCuisines() {
-    const { data } = await axios.get(
-      `http://localhost:3000/pub/cuisines/?page=${currentPage}&search=${search}&sort=${sort}&filter=${filter}`
-    );
-    // console.log(data);
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3000/pub/cuisines/?page=${currentPage}&search=${search}&sort=${sort}&filter=${filter}`
+      );
+      // console.log(data);
 
-    setPubCuisines(data?.data);
-    setCurrentPage(data?.currentPage);
-    setTotalPage(data?.totalPage);
+      setPubCuisines(data?.data);
+      setCurrentPage(data?.currentPage);
+      setTotalPage(data?.totalPage);
+    } catch (error) {
+      Toastify({
+        text: error.response.data.error.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
+        style: {
+          background: "#F87171",
+          color: "black",
+          border: "solid #000000",
+          borderRadius: "8px",
+          boxShadow: "2px 2px black",
+          paddingRight: "2.5rem",
+        },
+      }).showToast();
+    }
   }
 
   async function fetchCategories() {
-    const { data } = await axios.get(`http://localhost:3000/pub/categories/`);
-    // console.log(data);
+    try {
+      const { data } = await axios.get(`http://localhost:3000/pub/categories/`);
+      // console.log(data);
 
-    setCategories(data?.data);
+      setCategories(data?.data);
+    } catch (error) {
+      Toastify({
+        text: error.response.data.error.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
+        style: {
+          background: "#F87171",
+          color: "black",
+          border: "solid #000000",
+          borderRadius: "8px",
+          boxShadow: "2px 2px black",
+          paddingRight: "2.5rem",
+        },
+      }).showToast();
+    }
   }
 
   useEffect(() => {

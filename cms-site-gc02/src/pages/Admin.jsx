@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import Toastify from "toastify-js";
 import TabelCuisines from "../components/TabelCuisines";
 import TabelCategories from "../components/TabelCategories";
 
 const Admin = () => {
+  const navigate = useNavigate();
   const isError = (error) => {
     Toastify({
       text: error.response.data.error.message,
@@ -41,6 +43,14 @@ const Admin = () => {
       setCuisines(data.data);
     } catch (error) {
       isError(error);
+
+      if (
+        error.response.data.error.message === "Token expired" ||
+        error.response.data.error.message === "Your token is invalid"
+      ) {
+        localStorage.clear();
+        navigate("/login");
+      }
     }
   };
 

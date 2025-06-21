@@ -1,11 +1,12 @@
 # P2-Challenge-2 (Client Side)
 
-- Tema Aplikasi: ...
+- Tema Aplikasi: Restaurant
 
 Struktur Folder:
 
 - server (PORT: 3000)
-- client-public-cms
+- cms-site-gc02
+- public-site-gc02
 
 ## W2D1
 
@@ -13,25 +14,26 @@ Struktur Folder:
 
 Buatlah web layouting menggunakan HTML dan CSS (boleh menggunakan CSS framework) untuk aplikasi client kamu meliputi halaman:
 
-- [ ] **Public site**
-  - [ ] Halaman Home/Landing Page
+- [ v ] **Public site**
+
+  - [ v ] Halaman Home/Landing Page
     - Halaman yang berfungsi untuk menampilkan data Entitas Utama berbentuk Card, tambahkan input search/filter dan pagination pada halaman ini, buatlah halaman ini dengan layout yang rapi dan semenarik mungkin.
-  - [ ] Halaman Detail
+  - [ v ] Halaman Detail
     - Buatlah Halaman yang berisi detail dari Entitas Utama.
 
-- [ ] **CMS site**
-  - [ ] Halaman Login
+- [ v ] **CMS site**
+  - [ v ] Halaman Login
     Pada halaman ini buatlah sebuah form untuk menampung input email dan password user yang digunakan untuk masuk ke CMS
-  - [ ] Halaman list entitas utama . Tampilkan data entity dalam bentuk Tabel .
-  - [ ] Navbar / Sidebar yang berfungsi sebagai navigasi halaman.
-  - [ ] Halaman create entitas utama
+  - [ v ] Halaman list entitas utama . Tampilkan data entity dalam bentuk Tabel .
+  - [ v ] Navbar / Sidebar yang berfungsi sebagai navigasi halaman.
+  - [ v ] Halaman create entitas utama
     - Buatlah form yang berfungsi sebagai penampung input data entitas utama yang akan dibuat, sesuaikanlah input dengan dengan tipe yang sesuai. Untuk imgUrl buatlah input bertipe text saja.
-  - [ ] Halaman edit entitas utama
+  - [ v ] Halaman edit entitas utama
     - Buatlah form yang sama persis seperti pada halaman create dengan Judul halaman/form yang berbeda.
-  - [ ] Halaman upload image entitas utama
+  - [ v ] Halaman upload image entitas utama
     - Buatlah sebuah halaman yang menampilkan nama/title entitas utama + gambar (yang akan diubah), beserta sebuah input berupa select File untuk property imgUrl.
-  - [ ] Halaman list untuk entitas kedua. Tampilkan data entity dalam bentuk Tabel .
-  - [ ] Halaman register staff
+  - [ v ] Halaman list untuk entitas kedua. Tampilkan data entity dalam bentuk Tabel .
+  - [ v ] Halaman register staff
     - Pada halaman ini buatlah sebuah form untuk menampung input semua data user yang akan didaftarkan oleh admin.
 
 ## W2D2
@@ -40,19 +42,20 @@ Buatlah web layouting menggunakan HTML dan CSS (boleh menggunakan CSS framework)
 
 Convert layout atau slicing template yang sudah dibuat ke dalam React.js:
 
-- [ ] Coba buat React pada project hasil generate Vite
-- [ ] Public site
-  - [ ] Halaman Home/Landing Page
-  - [ ] Halaman Detail (Public)
+- [ v ] Coba buat React pada project hasil generate Vite
+- [ v ] Public site
 
-- [ ] CMS site
-  - [ ] Halaman Login
-  - [ ] Halaman list entitas utama
-  - [ ] Halaman create entitas utama
-  - [ ] Halaman edit entitas utama
-  - [ ] Halaman upload image entitas utama
-  - [ ] Halaman list untuk entitas kedua
-  - [ ] Halaman register staff
+  - [ v ] Halaman Home/Landing Page
+  - [ v ] Halaman Detail (Public)
+
+- [ v ] CMS site
+  - [ v ] Halaman Login
+  - [ v ] Halaman list entitas utama
+  - [ v ] Halaman create entitas utama
+  - [ v ] Halaman edit entitas utama
+  - [ v ] Halaman upload image entitas utama
+  - [ v ] Halaman list untuk entitas kedua
+  - [ v ] Halaman register staff
 
 ## W2D3
 
@@ -62,19 +65,20 @@ Integrasikan Halaman Web dengan server yang sudah kalian buat pada Challenge/Pro
 
 Pastikan setiap pergantian tampilan terjadi secara reaktif dengan tidak me-refresh web browser mu. Pasca login berhasil, user akan dinavigasikan ke tampilan home/list.
 
-- [ ] Public site
-  - [ ] GET data entitas utama pada halaman Home/Landing Page (include: pagination, filter dan sort)
-  - [ ] GET data detail entitas utama pada halaman Detail
+- [ v ] Public site
 
-- [ ] CMS site
-  - [ ] POST pada halaman Login
-  - [ ] GET data entitas utama pada halaman list entitas utama (include: pagination, filter dan sort)
-  - [ ] POST pada halaman create entitas utama
-  - [ ] PUT pada halaman edit entitas utama
-  - [ ] DELETE untuk menghapus entitas utama
-  - [ ] PATCH untuk mengupload image / mengupdate imgUrl entitas utama
-  - [ ] GET data entitas kedua pada Halaman list entitas kedua
-  - [ ] POST pada Halaman register staff
+  - [ v ] GET data entitas utama pada halaman Home/Landing Page (include: pagination, filter dan sort)
+  - [ v ] GET data detail entitas utama pada halaman Detail
+
+- [ v ] CMS site
+  - [ v ] POST pada halaman Login
+  - [ v ] GET data entitas utama pada halaman list entitas utama (include: pagination, filter dan sort)
+  - [ v ] POST pada halaman create entitas utama
+  - [ v ] PUT pada halaman edit entitas utama
+  - [ v ] DELETE untuk menghapus entitas utama
+  - [ v ] PATCH untuk mengupload image / mengupdate imgUrl entitas utama
+  - [ v ] GET data entitas kedua pada Halaman list entitas kedua
+  - [ v ] POST pada Halaman register staff
 
 ## W2D4
 
@@ -82,17 +86,17 @@ Pastikan setiap pergantian tampilan terjadi secara reaktif dengan tidak me-refre
 
 Project web-client kalian akan terdiri dari beberapa page/route. Silahkan Implementasikan routing pada project web-client kalian:
 
-- [ ] Public site
-  - [ ] Halaman Home/Landing Page
-  - [ ] Halaman Detail
-- [ ] CMS site
-  - [ ] Halaman Login
-  - [ ] Halaman list entitas utama
-  - [ ] Halaman create entitas utama (boleh menggunakan modal)
-  - [ ] Halaman edit entitas utama (boleh menggunakan modal)
-  - [ ] Halaman upload image untuk entitas utama (boleh menggunakan modal)
-  - [ ] Halaman list untuk entitas kedua
-  - [ ] Halaman register staff
+- [ v ] Public site
+  - [ v ] Halaman Home/Landing Page
+  - [ v ] Halaman Detail
+- [ v ] CMS site
+  - [ v ] Halaman Login
+  - [ v ] Halaman list entitas utama
+  - [ v ] Halaman create entitas utama (boleh menggunakan modal)
+  - [ v ] Halaman edit entitas utama (boleh menggunakan modal)
+  - [ v ] Halaman upload image untuk entitas utama (boleh menggunakan modal)
+  - [ v ] Halaman list untuk entitas kedua
+  - [ v ] Halaman register staff
 
 ### Deploy Client
 
