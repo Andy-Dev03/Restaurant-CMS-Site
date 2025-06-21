@@ -84,7 +84,7 @@ const Login = () => {
   return (
     <>
       <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 min-h-screen flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg w-100 inset-shadow-sm inset-shadow-indigo-500/50 border border-blue-500/20">
+        <div className="bg-white p-8 rounded-lg md:w-100 inset-shadow-sm inset-shadow-indigo-500/50 border border-blue-500/20">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-purple-400 bg-clip-text text-transparent drop-shadow-[1.5px_0.5px_1px_black] ">
               CMS LOGIN
