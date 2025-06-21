@@ -1,27 +1,83 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Form from "../components/Form";
-import TabelEntitiy from "../components/TabelEntity";
+import Toastify from "toastify-js";
+import TabelCuisines from "../components/TabelCuisines";
+import TabelCategories from "../components/TabelCategories";
 
 const Admin = () => {
-  // Exist the list or edit
-  const [showNHide, setShowNHide] = useState("listCuisines");
+  const isError = (error) => {
+    Toastify({
+      text: error.response.data.error.message,
+      duration: 3000,
+      newWindow: true,
+      close: true,
+      gravity: "bottom", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      className: "custom-toast",
+      style: {
+        background: "#F87171",
+        color: "black",
+        border: "solid #000000",
+        borderRadius: "8px",
+        boxShadow: "2px 2px black",
+        paddingRight: "2.5rem",
+      },
+    }).showToast();
+  };
 
-  // Form penampung cuisine per id
-  const [formCuisine, setFormCuisine] = useState(null);
+  const [categoriesOrCuisines, setCategoriesOrCuisines] = useState("cuisines");
 
   // Get Cuisines
   const [getCuisines, setCuisines] = useState([]);
 
   const fetchCuisines = async () => {
-    const token = localStorage.getItem("accessToken");
+    try {
+      const { data } = await axios.get("http://localhost:3000/cuisines", {
+        headers: {
+          Authorization: `Bearer ${localStorage.accessToken}`,
+        },
+      });
+      setCuisines(data.data);
+    } catch (error) {
+      isError(error);
+    }
+  };
 
-    const { data } = await axios.get("http://localhost:3000/cuisines", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    setCuisines(data.data);
+  // Delete
+  const deleteButton = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:3000/cuisines/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.accessToken}`,
+          },
+        }
+      );
+
+      fetchCuisines();
+      Toastify({
+        text: data.data.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
+        style: {
+          background: "#34D399",
+          color: "black",
+          border: "solid #000000",
+          borderRadius: "8px",
+          boxShadow: "2px 2px black",
+          paddingRight: "2.5rem",
+        },
+      }).showToast();
+    } catch (error) {
+      isError(error);
+    }
   };
 
   useEffect(() => {
@@ -30,27 +86,41 @@ const Admin = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-4 min-h-screen overflow-y-auto">
-        {showNHide === "listCuisines" && (
-          <TabelEntitiy
-            getCuisines={getCuisines}
-            fetchCuisines={fetchCuisines}
-            setShowNHide={setShowNHide}
-            setFormCuisine={setFormCuisine}
-          />
-        )}
-        <div className="bg-white col-span-3 p-6">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Edit Entity</h2>
-            <p className="text-gray-600">Update your data to the databased</p>
-          </div>
-          <Form
-            showNHide={showNHide}
-            setShowNHide={setShowNHide}
-            setFormCuisine={setFormCuisine}
-            formCuisine={formCuisine}
-          />
+      <div className="md:p-6 p-4 pb-24">
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Entity List</h2>
+          <p className="font-semibold text-gray-600">
+            All the entities of{" "}
+            {categoriesOrCuisines === "cuisines" ? "Cuisines" : "Categories"}
+          </p>
         </div>
+
+        {categoriesOrCuisines === "cuisines" && (
+          <>
+            <button
+              className="border bg-gray-900 text-white rounded-xl px-2 py-2 mb-4 hover:bg-gray-800/90"
+              onClick={() => setCategoriesOrCuisines("categories")}
+            >
+              <span>Categories Tabel</span>
+            </button>
+            <TabelCuisines
+              getCuisines={getCuisines}
+              deleteButton={deleteButton}
+            />
+          </>
+        )}
+
+        {categoriesOrCuisines === "categories" && (
+          <>
+            <button
+              className="border bg-gray-900 text-white rounded-xl px-2 py-2 mb-4 hover:bg-gray-800/90"
+              onClick={() => setCategoriesOrCuisines("cuisines")}
+            >
+              <span>Cuisines Tabel</span>
+            </button>
+            <TabelCategories isError={isError} />
+          </>
+        )}
       </div>
     </>
   );

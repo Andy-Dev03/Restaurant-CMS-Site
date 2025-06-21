@@ -1,9 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from "react-router";
+import Button from "./Button";
+import Toastify from "toastify-js";
 
-const Form = ({ showNHide, setShowNHide }) => {
-  //Create
-  const [formData, setFormData] = useState({
+const Form = ({ propName, handleSubmit, getDetailCuisine, isEdit }) => {
+  const [getCategories, setCategories] = useState([]);
+
+  const [form, setForm] = useState({
     name: "",
     description: "",
     price: "",
@@ -11,49 +15,77 @@ const Form = ({ showNHide, setShowNHide }) => {
     categoryId: "",
   });
 
-  const postNewCuisine = async () => {
-    await axios.post("http://localhost:3000/cuisines", formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  const handleInput = (fieldName, e) => {
+    let value = e.target.value;
+    if (fieldName === "price") {
+      value = +e.target.value;
+    }
+
+    setForm((prevValue) => {
+      return {
+        ...prevValue,
+        [fieldName]: value,
+      };
     });
   };
 
-  const btnChangeCreate = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  //Get Categories
-  const [getCategories, setCategories] = useState([]);
-
-  const token = localStorage.getItem("accessToken");
-  useEffect(() => {
-    const getTheCategories = async () => {
+  // Fetch Categories
+  const fetchCategories = async () => {
+    try {
       const { data } = await axios.get("http://localhost:3000/categories", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${localStorage.accessToken}`,
         },
       });
-      setCategories(data.data);
-    };
 
-    getTheCategories();
-  }, []);
-
-  const goEntitiyList = (event) => {
-    event.preventDefault();
-    setShowNHide("listCuisines");
+      setCategories(data?.data);
+    } catch (error) {
+      Toastify({
+        text: error.response.data.error.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        className: "custom-toast",
+        style: {
+          background: "#F87171",
+          color: "black",
+          border: "solid #000000",
+          borderRadius: "8px",
+          boxShadow: "2px 2px black",
+          paddingRight: "2.5rem",
+        },
+      }).showToast();
+    }
   };
 
-  // Edit
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    if (getDetailCuisine) {
+      delete getDetailCuisine?.authorId;
+      delete getDetailCuisine?.createdAt;
+      delete getDetailCuisine?.updatedAt;
+      delete getDetailCuisine?.id;
+      delete getDetailCuisine?.Category;
+      delete getDetailCuisine?.User;
+
+      setForm((oldValue) => {
+        return {
+          ...oldValue,
+          ...getDetailCuisine,
+        };
+      });
+    }
+  }, [getDetailCuisine]);
 
   return (
     <>
-      <form className="space-y-6" onSubmit={postNewCuisine}>
+      <form className="space-y-6" onSubmit={(e) => handleSubmit(e, form)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label
@@ -68,8 +100,10 @@ const Form = ({ showNHide, setShowNHide }) => {
               name="name"
               className="w-full px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               placeholder="Enter entity name"
-              onChange={btnChangeCreate}
-              value={formData.name}
+              onChange={(e) => {
+                handleInput("name", e);
+              }}
+              value={form?.name}
             />
           </div>
 
@@ -85,8 +119,10 @@ const Form = ({ showNHide, setShowNHide }) => {
               id="price"
               name="price"
               className="w-full px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
-              onChange={btnChangeCreate}
-              value={formData.price}
+              onChange={(e) => {
+                handleInput("price", e);
+              }}
+              value={form?.price}
             />
           </div>
         </div>
@@ -105,8 +141,10 @@ const Form = ({ showNHide, setShowNHide }) => {
               name="imgUrl"
               className="w-full px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               placeholder="https://example.com/image.jpg"
-              onChange={btnChangeCreate}
-              value={formData.imgUrl}
+              onChange={(e) => {
+                handleInput("imgUrl", e);
+              }}
+              value={form?.imgUrl}
             />
           </div>
 
@@ -121,8 +159,10 @@ const Form = ({ showNHide, setShowNHide }) => {
               id="categoryId"
               name="categoryId"
               className="w-full px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
-              onChange={btnChangeCreate}
-              value={formData.categoryId}
+              onChange={(e) => {
+                handleInput("categoryId", e);
+              }}
+              value={form?.categoryId}
             >
               <option value="" disabled>
                 Choose your category
@@ -149,28 +189,26 @@ const Form = ({ showNHide, setShowNHide }) => {
             rows="6"
             className="w-full px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
             placeholder="Enter your description here..."
-            onChange={btnChangeCreate}
-            value={formData.description}
+            onChange={(e) => {
+              handleInput("description", e);
+            }}
+            value={form?.description}
           ></textarea>
         </div>
 
         <div className="flex justify-end space-x-4">
-          {showNHide === "editCuisine" && (
-            <button
-              type="button"
-              className="px-4 py-2 border border-black text-black font-semibold rounded-md hover:bg-red-600/70 hover:text-white"
-              onClick={goEntitiyList}
-            >
-              Cancel
-            </button>
+          {isEdit && (
+            <Link to={"/"}>
+              <button
+                type="button"
+                className="px-4 py-2 border border-black text-black font-semibold rounded-md hover:bg-red-600/70 hover:text-white"
+              >
+                Cancel
+              </button>
+            </Link>
           )}
 
-          <button
-            type="submit"
-            className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-600"
-          >
-            {showNHide === "editCuisine" ? "Update Entitiy" : "Create Entity"}
-          </button>
+          <Button nameProp={propName} />
         </div>
       </form>
     </>
