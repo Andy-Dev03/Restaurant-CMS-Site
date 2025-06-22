@@ -12,11 +12,14 @@ const Edit = () => {
 
   const fetchDetail = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:3000/cuisines/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.accessToken}`,
-        },
-      });
+      const { data } = await axios.get(
+        `https://www.andylie.web.id/cuisines/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.accessToken}`,
+          },
+        }
+      );
       setDetailCuisine(data.data);
     } catch (error) {
       Toastify({
@@ -44,7 +47,7 @@ const Edit = () => {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        `http://localhost:3000/cuisines/${id}`,
+        `https://www.andylie.web.id/cuisines/${id}`,
         form,
         {
           headers: {
