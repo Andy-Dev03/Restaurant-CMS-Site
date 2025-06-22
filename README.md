@@ -16,6 +16,12 @@ This app is a restaurant website system with two separate frontend projects:
   https://client-cms-site-gc02.vercel.app  
   For admins to manage cuisines, categories, and users.
 
+- Domain Public:
+  https://public.andylie.web.id
+
+- Domain CMS Admin:
+  https://cms.andylie.web.id
+
 ---
 
 ## API Base URL
