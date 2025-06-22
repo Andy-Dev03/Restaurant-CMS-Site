@@ -3,7 +3,7 @@
     "name": "Sate Ayam",
     "description": "Sate ayam khas Madura",
     "price": 20000,
-    "imgUrl": "https://img.com/sate.jpg",
+    "imgUrl": "https://www.rumahmesin.com/wp-content/uploads/2017/03/resep-sate-ayam-madura-mencicipi-makanan-asli-indonesia-yang-mendunia.jpg",
     "categoryId": 1,
     "authorId": 2
   },
@@ -11,7 +11,7 @@
     "name": "Bakso",
     "description": "Bakso daging sapi dengan kuah kaldu",
     "price": 15000,
-    "imgUrl": "https://img.com/bakso.jpg",
+    "imgUrl": "https://cdn.tasteatlas.com/images/dishrestaurants/35a1edd0bee948e1bcf590b13f9f76c3.jpg",
     "categoryId": 1,
     "authorId": 1
   },
@@ -19,7 +19,7 @@
     "name": "Es Teh Manis",
     "description": "Minuman segar es teh",
     "price": 5000,
-    "imgUrl": "https://img.com/esteh.jpg",
+    "imgUrl": "https://asset.kompas.com/crops/VEMd5H4lRZYH6QAc3zr0b003UfU=/0x0:880x587/1200x800/data/photo/2023/08/16/64dc53ca9f3db.jpg",
     "categoryId": 3,
     "authorId": 1
   },
@@ -27,7 +27,7 @@
     "name": "Rendang",
     "description": "Daging sapi khas Padang",
     "price": 30000,
-    "imgUrl": "https://img.com/rendang.jpg",
+    "imgUrl": "https://hungryforever.net/wp-content/uploads/2017/11/chicken-rendang-scaled.jpg",
     "categoryId": 15,
     "authorId": 1
   },
@@ -35,7 +35,7 @@
     "name": "Nasi Goreng",
     "description": "Nasi goreng spesial dengan telur",
     "price": 18000,
-    "imgUrl": "https://img.com/nasgor.jpg",
+    "imgUrl": "https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2022/05/22/3156538993.jpg",
     "categoryId": 1,
     "authorId": 1
   },
@@ -43,7 +43,7 @@
     "name": "Kimchi",
     "description": "Sayuran fermentasi khas Korea",
     "price": 12000,
-    "imgUrl": "https://img.com/kimchi.jpg",
+    "imgUrl": "https://www.maangchi.com/wp-content/uploads/2014/06/fresh-kimchi-590x389.jpg",
     "categoryId": 17,
     "authorId": 1
   },
@@ -51,7 +51,7 @@
     "name": "Sushi",
     "description": "Sushi roll dengan salmon",
     "price": 25000,
-    "imgUrl": "https://img.com/sushi.jpg",
+    "imgUrl": "https://www.thedailymeal.com/img/gallery/the-complete-list-of-sushi-rolls-ranked/l-intro-1666963587.jpg",
     "categoryId": 18,
     "authorId": 1
   },
@@ -59,7 +59,7 @@
     "name": "Cheeseburger",
     "description": "Burger dengan keju leleh",
     "price": 22000,
-    "imgUrl": "https://img.com/cheeseburger.jpg",
+    "imgUrl": "https://www.sargento.com/assets/Uploads/Recipe/Image/burger_0.jpg",
     "categoryId": 8,
     "authorId": 1
   },
@@ -67,7 +67,7 @@
     "name": "Keripik Singkong",
     "description": "Cemilan renyah dari singkong",
     "price": 8000,
-    "imgUrl": "https://img.com/keripik.jpg",
+    "imgUrl": "https://asset.kompas.com/crops/-J7WiKZ7PvZGagZz-F3AJrI_4S8=/0x46:700x513/750x500/data/photo/2020/08/24/5f43a77a3c43e.jpg",
     "categoryId": 2,
     "authorId": 1
   },
@@ -75,7 +75,7 @@
     "name": "Cendol",
     "description": "Minuman tradisional manis",
     "price": 10000,
-    "imgUrl": "https://img.com/cendol.jpg",
+    "imgUrl": "https://farm2.staticflickr.com/1977/44465297355_c6077588a5_o.jpg",
     "categoryId": 3,
     "authorId": 1
   },
@@ -83,7 +83,7 @@
     "name": "Kue Lapis",
     "description": "Kue tradisional berlapis warna",
     "price": 7000,
-    "imgUrl": "https://img.com/kuelapis.jpg",
+    "imgUrl": "https://s4.bukalapak.com/uploads/content_attachment/e61a25c7869bd5237a7720b5/original/foto_utama_kue_lapis.jpg",
     "categoryId": 12,
     "authorId": 1
   },
@@ -91,7 +91,7 @@
     "name": "Dimsum",
     "description": "Cemilan kukus khas Cina",
     "price": 15000,
-    "imgUrl": "https://img.com/dimsum.jpg",
+    "imgUrl": "https://cdn.foodism.to/embedded_full/5df90d2ff3033.jpeg",
     "categoryId": 20,
     "authorId": 1
   },
@@ -99,7 +99,7 @@
     "name": "Spaghetti",
     "description": "Pasta saus bolognese",
     "price": 22000,
-    "imgUrl": "https://img.com/spaghetti.jpg",
+    "imgUrl": "https://www.modernhoney.com/wp-content/uploads/2023/02/TikTok-Million-Dollar-Baked-Spaghetti-1-crop-scaled.jpg",
     "categoryId": 19,
     "authorId": 1
   },
@@ -107,7 +107,7 @@
     "name": "Ayam Geprek",
     "description": "Ayam goreng sambal pedas",
     "price": 18000,
-    "imgUrl": "https://img.com/geprek.jpg",
+    "imgUrl": "https://i2.wp.com/resepkoki.id/wp-content/uploads/2017/07/Resep-Ayam-geprek-jogja.jpg?fit=2322%2C2167&ssl=1",
     "categoryId": 13,
     "authorId": 1
   },
@@ -115,7 +115,7 @@
     "name": "Tahu Isi",
     "description": "Tahu goreng isi sayur",
     "price": 6000,
-    "imgUrl": "https://img.com/tahuisi.jpg",
+    "imgUrl": "https://asset.kompas.com/crops/ddv9YkIO4Z91U6YHKQabG3STTD0=/0x0:698x465/750x500/data/photo/2021/03/16/6050217084fc5.jpg",
     "categoryId": 2,
     "authorId": 1
   },
@@ -123,7 +123,7 @@
     "name": "Capcay",
     "description": "Sayuran tumis bergizi",
     "price": 16000,
-    "imgUrl": "https://img.com/capcay.jpg",
+    "imgUrl": "https://asset.kompas.com/crops/0TAYtSARLhrA8bCNnfQyXeXj2N0=/100x67:900x600/1200x800/data/photo/2021/01/01/5fee5925f248d.jpg",
     "categoryId": 6,
     "authorId": 1
   },
@@ -131,7 +131,7 @@
     "name": "Bistik Jawa",
     "description": "Bistik khas daerah Jawa",
     "price": 24000,
-    "imgUrl": "https://img.com/bistik.jpg",
+    "imgUrl": "https://img-global.cpcdn.com/recipes/c8eb4cc910198747/680x482cq70/bistik-jawa-foto-resep-utama.jpg",
     "categoryId": 16,
     "authorId": 1
   },
@@ -139,7 +139,7 @@
     "name": "Roti Bakar",
     "description": "Roti bakar coklat keju",
     "price": 12000,
-    "imgUrl": "https://img.com/rotibakar.jpg",
+    "imgUrl": "https://bisnisukm.com/uploads/2013/09/Roti-Bakar-Van-Java.jpg",
     "categoryId": 4,
     "authorId": 1
   },
@@ -147,7 +147,7 @@
     "name": "Ikan Bakar",
     "description": "Ikan bakar bumbu pedas",
     "price": 27000,
-    "imgUrl": "https://img.com/ikanbakar.jpg",
+    "imgUrl": "https://www.resepkoki.id/wp-content/uploads/2017/10/Resep-Ikan-bakar-bumbu-bali-1024x1000.jpg",
     "categoryId": 9,
     "authorId": 1
   },
@@ -155,7 +155,7 @@
     "name": "Tteokbokki",
     "description": "Kue beras pedas Korea",
     "price": 22000,
-    "imgUrl": "https://img.com/tteokbokki.jpg",
+    "imgUrl": "https://4.bp.blogspot.com/-JLe-orfrQgA/Tau8nNqodnI/AAAAAAAAADk/OSuH1D_dLs4/s1600/topokki.jpg",
     "categoryId": 17,
     "authorId": 1
   }

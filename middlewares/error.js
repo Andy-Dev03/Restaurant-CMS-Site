@@ -34,6 +34,9 @@ const isError = (err, req, res, next) => {
   } else if (err.name === "JsonWebTokenError") {
     statusError = 401;
     msgError = "Your token is invalid";
+  } else if (err.name === "TokenExpiredError") {
+    statusError = 401;
+    msgError = "Token expired";
   } else if (err.message === "FORBIDDEN") {
     statusError = 403;
     msgError = "You are not authorized to do this action";
