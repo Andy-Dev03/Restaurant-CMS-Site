@@ -18,7 +18,7 @@ const Home = () => {
   async function fetchPubCuisines() {
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/pub/cuisines/?page=${currentPage}&search=${search}&sort=${sort}&filter=${filter}`
+        `https://www.andylie.web.id/pub/cuisines/?page=${currentPage}&search=${search}&sort=${sort}&filter=${filter}`
       );
       // console.log(data);
 
@@ -49,7 +49,9 @@ const Home = () => {
 
   async function fetchCategories() {
     try {
-      const { data } = await axios.get(`http://localhost:3000/pub/categories/`);
+      const { data } = await axios.get(
+        `https://www.andylie.web.id/pub/categories/`
+      );
       // console.log(data);
 
       setCategories(data?.data);
