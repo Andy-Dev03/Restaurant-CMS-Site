@@ -4,9 +4,8 @@
 
 Struktur Folder:
 
-- server (PORT: 3000)
-- cms-site-gc02
-- public-site-gc02
+- client-cms-gc02
+- public-public-gc02
 
 ## W2D1
 
@@ -102,4 +101,4 @@ Project web-client kalian akan terdiri dari beberapa page/route. Silahkan Implem
 
 Coba lakukan deployment untuk client (bisa coba deploy hal sederhana terlebih dahulu seperti halaman yang menampilkan ‘hello world’) menggunakan Firebase
 
-- [ ] Deploy client
+- [ v ] Deploy client

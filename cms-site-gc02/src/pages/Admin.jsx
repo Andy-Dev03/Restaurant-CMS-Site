@@ -93,7 +93,7 @@ const Admin = () => {
   const deleteButton = async (id) => {
     try {
       const { data } = await axios.delete(
-        `https://www.andylie.web.id//cuisines/${id}`,
+        `https://www.andylie.web.id/cuisines/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.accessToken}`,
@@ -152,7 +152,7 @@ const Admin = () => {
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Entity List</h2>
           <p className="font-semibold text-gray-600">
-            All the entities of{" "}
+            All the data of{" "}
             {categoriesOrCuisines === "cuisines" ? "Cuisines" : "Categories"}
           </p>
         </div>
