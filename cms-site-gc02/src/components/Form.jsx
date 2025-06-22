@@ -32,11 +32,14 @@ const Form = ({ propName, handleSubmit, getDetailCuisine, isEdit }) => {
   // Fetch Categories
   const fetchCategories = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/categories", {
-        headers: {
-          Authorization: `Bearer ${localStorage.accessToken}`,
-        },
-      });
+      const { data } = await axios.get(
+        "https://www.andylie.web.id/categories",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.accessToken}`,
+          },
+        }
+      );
 
       setCategories(data?.data);
     } catch (error) {

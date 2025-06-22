@@ -9,7 +9,7 @@ const Create = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/cuisines",
+        "https://www.andylie.web.id/cuisines",
         form,
         {
           headers: {

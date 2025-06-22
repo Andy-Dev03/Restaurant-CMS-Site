@@ -7,6 +7,14 @@ import TabelCategories from "../components/TabelCategories";
 
 const Admin = () => {
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
+  const cuisinesPagination = handlePagination(totalPage);
+
+  const [categoriesPage, setCategoriesPage] = useState(1);
+  const [categoriesTotalPage, setCategoriesTotalPage] = useState(0);
+  const categoriesPagination = handlePagination(categoriesTotalPage);
+
   const isError = (error) => {
     Toastify({
       text: error.response.data.error.message,
@@ -35,12 +43,17 @@ const Admin = () => {
 
   const fetchCuisines = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/cuisines", {
-        headers: {
-          Authorization: `Bearer ${localStorage.accessToken}`,
-        },
-      });
-      setCuisines(data.data);
+      const { data } = await axios.get(
+        `https://www.andylie.web.id/cuisines?page=${currentPage}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.accessToken}`,
+          },
+        }
+      );
+      setCuisines(data?.data);
+      setCurrentPage(data?.currentPage);
+      setTotalPage(data?.totalPage);
     } catch (error) {
       isError(error);
 
@@ -54,11 +67,33 @@ const Admin = () => {
     }
   };
 
+  // Get Categories
+  const [getCategories, setCategories] = useState([]);
+
+  const fetchCategories = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://www.andylie.web.id/categories?page=${categoriesPage}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.accessToken}`,
+          },
+        }
+      );
+
+      setCategories(data.data);
+      setCategoriesPage(data?.currentPage);
+      setCategoriesTotalPage(data?.totalPage);
+    } catch (error) {
+      isError(error);
+    }
+  };
+
   // Delete
   const deleteButton = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:3000/cuisines/${id}`,
+        `https://www.andylie.web.id//cuisines/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.accessToken}`,
@@ -90,9 +125,26 @@ const Admin = () => {
     }
   };
 
+  function handlePagination(pageCount) {
+    let arr = [];
+    for (let i = 1; i <= pageCount; i++) {
+      arr.push(i);
+    }
+    return arr;
+  }
+
   useEffect(() => {
-    fetchCuisines();
-  }, []);
+    if (categoriesOrCuisines === "cuisines") {
+      fetchCuisines();
+    } else {
+      fetchCategories();
+    }
+  }, [currentPage, categoriesPage, categoriesOrCuisines]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+    setCategoriesPage(1);
+  }, [categoriesOrCuisines]);
 
   return (
     <>
@@ -117,6 +169,26 @@ const Admin = () => {
               getCuisines={getCuisines}
               deleteButton={deleteButton}
             />
+
+            {/* <!-- Pagination --> */}
+            <div className="flex justify-center items-center gap-2 pt-4">
+              <div className="flex gap-2">
+                {cuisinesPagination?.map((page) => (
+                  <button
+                    type="button"
+                    className={
+                      page === currentPage
+                        ? "px-4 py-2 rounded-lg bg-gray-900 text-white"
+                        : "px-4 py-2 rounded-lg bg-gray-500 hover:bg-gray-700 text-gray-300 transition duration-200"
+                    }
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                  >
+                    {page}
+                  </button>
+                ))}
+              </div>
+            </div>
           </>
         )}
 
@@ -128,7 +200,27 @@ const Admin = () => {
             >
               <span>Cuisines Tabel</span>
             </button>
-            <TabelCategories isError={isError} />
+            <TabelCategories getCategories={getCategories} />
+
+            {/* <!-- Pagination --> */}
+            <div className="flex justify-center items-center gap-2 pt-4">
+              <div className="flex gap-2">
+                {categoriesPagination?.map((page) => (
+                  <button
+                    key={page}
+                    type="button"
+                    className={
+                      page === categoriesPage
+                        ? "px-4 py-2 rounded-lg bg-gray-900 text-white"
+                        : "px-4 py-2 rounded-lg bg-gray-500 hover:bg-gray-700 text-gray-300 transition duration-200"
+                    }
+                    onClick={() => setCategoriesPage(page)}
+                  >
+                    {page}
+                  </button>
+                ))}
+              </div>
+            </div>
           </>
         )}
       </div>

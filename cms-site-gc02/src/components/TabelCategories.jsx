@@ -1,27 +1,4 @@
-import { useState } from "react";
-import axios from "axios";
-import { useEffect } from "react";
-
-const TabelCategories = ({ isError }) => {
-  const [getCategories, setCategories] = useState([]);
-  // Get Categories
-  const fetchCategories = async () => {
-    try {
-      const { data } = await axios.get("http://localhost:3000/categories", {
-        headers: {
-          Authorization: `Bearer ${localStorage.accessToken}`,
-        },
-      });
-
-      setCategories(data.data);
-    } catch (error) {
-      isError(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+const TabelCategories = ({ getCategories }) => {
   return (
     <>
       <div className="hidden md:block rounded-lg border overflow-hidden">
