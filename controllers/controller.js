@@ -100,7 +100,11 @@ class Controller {
 
   static async getCuisines(req, res, next) {
     try {
-      const cuisines = await Cuisine.findAll({
+      let { page } = req.query;
+      const limit = 10;
+      if (!+page) page = 1;
+
+      const option = {
         include: [
           {
             model: User,
@@ -115,11 +119,23 @@ class Controller {
             },
           },
         ],
-      });
+        order: [["id", "ASC"]],
+      };
+
+      if (page) {
+        option.limit = limit;
+        option.offset = limit * (page - 1);
+      }
+
+      const { count, rows } = await Cuisine.findAndCountAll(option);
 
       res.status(200).json({
         statusCode: 200,
-        data: cuisines,
+        total: count,
+        size: limit,
+        totalPage: Math.ceil(count / limit),
+        currentPage: +page,
+        data: rows,
       });
     } catch (err) {
       next(err);
@@ -252,11 +268,25 @@ class Controller {
 
   static async getCategories(req, res, next) {
     try {
-      const categories = await Category.findAll();
+      let { page } = req.query;
+      const limit = 10;
+      if (!+page) page = 1;
+
+      const option = {
+        order: [["id", "ASC"]],
+        limit,
+        offset: limit * (page - 1),
+      };
+
+      const { count, rows } = await Category.findAndCountAll(option);
 
       res.status(200).json({
         statusCode: 200,
-        data: categories,
+        total: count,
+        size: limit,
+        totalPage: Math.ceil(count / limit),
+        currentPage: +page,
+        data: rows,
       });
     } catch (err) {
       next(err);
