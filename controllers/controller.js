@@ -101,12 +101,20 @@ class Controller {
   static async getCuisines(req, res, next) {
     try {
       const cuisines = await Cuisine.findAll({
-        include: {
-          model: User,
-          attributes: {
-            exclude: ["password"],
+        include: [
+          {
+            model: User,
+            attributes: {
+              exclude: ["password"],
+            },
           },
-        },
+          {
+            model: Category,
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+          },
+        ],
       });
 
       res.status(200).json({
@@ -340,7 +348,22 @@ class Controller {
   static async findPubCuisines(req, res, next) {
     try {
       const { id } = req.params;
-      const cuisine = await Cuisine.findByPk(+id);
+      const cuisine = await Cuisine.findByPk(+id, {
+        include: [
+          {
+            model: User,
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+          },
+          {
+            model: Category,
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+          },
+        ],
+      });
 
       if (!cuisine) throw new Error("CUISINE_NOT_FOUND");
 
