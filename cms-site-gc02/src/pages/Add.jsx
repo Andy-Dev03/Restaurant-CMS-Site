@@ -66,7 +66,7 @@ const Add = () => {
 
   return (
     <>
-      <div className="min-h-screen pb-12 md:pb-0 md:p-6 p-4 pb-24">
+      <div className="min-h-screen md:pb-0 md:p-6 p-4 pb-24">
         <div className="bg-white col-span-3">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-gray-900">Add New User</h2>
