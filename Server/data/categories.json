@@ -1,0 +1,22 @@
+[
+  { "name": "Makanan Berat" },
+  { "name": "Makanan Ringan" },
+  { "name": "Minuman" },
+  { "name": "Dessert" },
+  { "name": "Frozen Food" },
+  { "name": "Vegetarian" },
+  { "name": "Vegan" },
+  { "name": "Fast Food" },
+  { "name": "Seafood" },
+  { "name": "BBQ" },
+  { "name": "Kue Kering" },
+  { "name": "Kue Basah" },
+  { "name": "Olahan Ayam" },
+  { "name": "Olahan Daging" },
+  { "name": "Masakan Padang" },
+  { "name": "Masakan Jawa" },
+  { "name": "Masakan Korea" },
+  { "name": "Masakan Jepang" },
+  { "name": "Masakan Barat" },
+  { "name": "Masakan Cina" }
+]
